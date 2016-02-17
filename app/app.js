@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var app = express();
-var router = require( './router' );
 
 //development only
 if ('development' == app.get('env')) {
@@ -15,6 +14,8 @@ else {
 	global.config = require('./config/config.js');
 }
 
+
+var router = require( './router' );
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
