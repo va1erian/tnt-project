@@ -45,7 +45,7 @@ router.get( '/address/check', addresses.checkAddress );
 // add the address
 router.get( '/address/add', addresses.addAddress );
 // delete the address
-router.get( '/address/delete', addresses.deleteAddress );
+router.get( '/address/delete/:idAddress', addresses.deleteAddress );
 // add the address
 router.get( '/address/all', addresses.getListAddresses );
 
