@@ -1,0 +1,96 @@
+extends layout
+
+block content
+
+  .navbar.navbar-default.navbar-static-top
+    .container
+      .navbar-header
+        button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navbar-ex-collapse')
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href='#')
+          span TnT
+      #navbar-ex-collapse.collapse.navbar-collapse
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(href='#') Accueil
+          li.active
+            a(href='#') Mon Compte
+  .section
+    .container
+      .row
+        .col-md-12
+          ul.breadcrumb
+            li
+              a(href='#') Accueil
+            li.active Mes adresses
+  .section
+    .container
+      .row
+        .col-md-12
+          h1 Ajouter une nouvelle adresse
+      .row
+        .col-md-6
+          form(role='form')
+            .form-group
+              label.control-label(for='exampleInputEmail1') Nom de l'adresse
+              input#exampleInputEmail1.form-control(placeholder='Exemple : Maison', type='email')
+            .row
+              .col-md-2
+                .form-group
+                  label.control-label(for='exampleInputEmail1') Numéro
+                  input#exampleInputEmail1.form-control(type='text', value='')
+              .col-md-10
+                .form-group
+                  label.control-label(for='exampleInputEmail1') Rue
+                  input#exampleInputEmail1.form-control(placeholder='Nom de rue', type='email')
+            .row
+              .col-md-3
+                .form-group
+                  label.control-label(for='exampleInputEmail1') CP
+                  input#exampleInputEmail1.form-control(type='text', placeholder='Code Postal')
+              .col-md-9
+                .form-group
+                  label.control-label(for='exampleInputEmail1') Ville
+                  input#exampleInputEmail1.form-control(placeholder='Nom de ville', type='text')
+            button.btn.btn-block.btn-lg.btn-warning(type='submit') Pré-valider
+        .col-md-6
+          p Adresse formatée par Google
+          img.img-responsive(src='http://maps.googleapis.com/maps/api/staticmap?center=Paris,France&zoom=12&size=550x200&sensor=false')
+          button.btn.btn-block.btn-lg.btn-success(type='submit') Valider
+  .section
+    .container
+      .row
+        .col-md-12
+          h1 Mes adresses enregistrées
+          .row
+            .col-md-12
+              table.table
+                thead
+                  tr
+                    th(draggable='true') Nom
+                    th Rue
+                    th Code Postal
+                    th Ville
+                    th #
+                tbody
+                  tr
+                    td Maison
+                    td 3, rue des platanes
+                    td 79000
+                    td Niort
+                    td x
+                  tr
+                    td Travail
+                    td 27, avenue Leclerc
+                    td 75000
+                    td Paris
+                    td x
+                  tr
+                    td Chez Thibaut
+                    td 1, rue du vieux port
+                    td 13011
+                    td Marseille
+                    td x
