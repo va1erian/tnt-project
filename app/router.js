@@ -8,7 +8,7 @@ var addresses = require('./lib/services/addresses/addresses');
 
 // Index
 router.get(	'/', function(req, res) {
-	res.render('index_connected', {title : "Root"});
+	res.render('index_not_connected', {title : "Root"});
 	//res.render('index_connected', {title : "Root"});
 });
 
@@ -44,6 +44,8 @@ router.get( '/bookmarkedjourney/:idJourney', function(req, res) {});
 router.get( '/bookmarkedjourney/:idJourney', bookdJourney.deleteBookmarkedJourney );
 
 /* Addresses */
+// addresses management main page
+router.get( '/address', addresses.renderAddress );
 // check if the address exists
 router.get( '/address/check', addresses.checkAddress );
 // add the address
@@ -52,14 +54,6 @@ router.get( '/address/add', addresses.addAddress );
 router.get( '/address/delete/:idAddress', addresses.deleteAddress );
 // add the address
 router.get( '/address/all', addresses.getListAddresses );
-
-
-router.get( '/test', function(req, res) {
-	res.render( 'test' );
-});
-router.get( '/testangular', function(req, res) {
-	res.render( 'testangular' );
-});
 
 
 module.exports = router;
