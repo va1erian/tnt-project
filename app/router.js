@@ -33,6 +33,6 @@ router.post('/bookmarkedjourney', function(req, res) {});
 // delete a bookmarked journey
 router.get( '/bookmarkedjourney/:idJourney', function(req, res) {});
 
-
+ 
 
 module.exports = router;
