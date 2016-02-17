@@ -1,0 +1,83 @@
+extends layout
+
+block content
+  div(ng-app='tntApp', ng-controller='tntHomeCtrl')
+    header.navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
+      .container
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='index.html') TnT
+            span.glyphicon.glyphicon-map-marker(aria-hidden='true')
+        nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href='#', data-toggle='modal', data-target='#signin-modal') Connexion
+            li
+              a(href='#', data-toggle='modal', data-target='#signup-modal') Inscription
+    
+    // Fenêtre modale connexion
+    #signin-modal.modal.fade(role='dialog')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal') ×
+            h4.modal-title Connexion
+            .modal-body.container
+              form.form-horizontal(role='form', ng-submit='signin()')
+                .form-group
+                  label.col-sm-2.control-label(for='login_email') E-mail
+                  .col-sm-4
+                    input#login_email.form-control(type='text', placeholder='E-mail', ng-model='signin_form.email')
+                .form-group
+                  label.col-sm-2.control-label(for='login_password') Mot de passe
+                  .col-sm-4
+                    input#login_password.form-control(type='password', placeholder='Mot de passe', ng-model='signin_form.password')
+                .form-group
+                  .col-sm-offset-2.col-sm-10
+                    button.btn.btn-success(type='submit') Connexion
+  
+    #signup-modal.modal.fade(role='dialog')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal') ×
+            h4.modal-title Inscription
+          .modal-body.container
+            form.form-horizontal(role='form', ng-submit='signup()')
+              .form-group
+                label.col-sm-2.control-label(for='signup_email') E-mail
+                .col-sm-4
+                  input#signup_email.form-control(type='email', placeholder='E-mail', ng-model='signup_form.email')
+              .form-group
+                label.col-sm-2.control-label(for='signup_firstname') Prénom
+                .col-sm-4
+                  input#signup_firstname.form-control(type='text', placeholder='Prénom', ng-model='signup_form.firstname')
+              .form-group
+                label.col-sm-2.control-label(for='signup_lastname') Nom de famille
+                .col-sm-4
+                  input#signup_lastname.form-control(type='text', placeholder='Nom de famille', ng-model='signup_form.lastname')
+              .form-group
+                label.col-sm-2.control-label(for='signup_birthdate') Date de naissance
+                .col-sm-4
+                  input#signup_birthdate.form-control(type='text', placeholder='JJ/MM/YYYY', ng-model='signup_form.birthdate')
+              .form-group
+                label.col-sm-2.control-label(for='signup_password') Mot de passe
+                .col-sm-4
+                  input#signup_password.form-control(type='password', placeholder='Mot de passe', ng-model='signup_form.password')
+              .form-group
+                label.col-sm-2.control-label Genre
+                .col-sm-4
+                  label.radio-inline
+                    input(type='radio', name='gender', ng-model='signup_form.gender', value='H')
+                    span Homme
+                  label.radio-inline
+                    input(type='radio', name='gender', ng-model='signup_form.gender', value='F')
+                    span Femme
+              .form-group
+                .col-sm-offset-2.col-sm-10
+                  button.btn.btn-success(type='submit') S'inscrire
+  script(src='/javascripts/index_not_connected.js')
