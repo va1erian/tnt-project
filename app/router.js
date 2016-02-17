@@ -33,6 +33,17 @@ router.post('/bookmarkedjourney', function(req, res) {});
 // delete a bookmarked journey
 router.get( '/bookmarkedjourney/:idJourney', function(req, res) {});
 
+<<<<<<< HEAD
  
+=======
+
+router.get( '/test', function(req, res) {
+	res.render( 'test' );
+});
+router.get( '/testangular', function(req, res) {
+	res.render( 'testangular' );
+});
+
+>>>>>>> refs/remotes/origin/sebferrer
 
 module.exports = router;
