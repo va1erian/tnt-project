@@ -34,5 +34,12 @@ router.post('/bookmarkedjourney', function(req, res) {});
 router.get( '/bookmarkedjourney/:idJourney', function(req, res) {});
 
 
+router.get( '/test', function(req, res) {
+	res.render( 'test' );
+});
+router.get( '/testangular', function(req, res) {
+	res.render( 'testangular' );
+});
+
 
 module.exports = router;
