@@ -1,6 +1,10 @@
 var logger 	= require('../../log/logger');
 var request	= require('request');
 
+exports.renderAddress = function(req, res) {
+	res.render('address');
+};
+
 exports.checkAddress = function(req, res) {
 	//res.render('index', {title : "checkAdress"});
 };
