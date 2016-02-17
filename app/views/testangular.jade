@@ -1,0 +1,21 @@
+extends layout
+
+block content
+
+  div(ng-app='tntApp', ng-controller='tntCtrl')
+    p Input something in the input box:
+    p
+      | Name : 
+      input(type='text', ng-model='name', placeholder='Enter name here')
+    h1 Hello {{name}}
+
+    br
+    {{ msg }}
+
+    br
+    p Formulaire genere via l'Ajax Angular :
+    br
+
+    #toto
+
+    script(src='./controllers/testangular.js')
