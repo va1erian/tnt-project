@@ -8,7 +8,7 @@ var addresses = require('./lib/services/addresses/addresses');
 
 // Index
 router.get(	'/', function(req, res) {
-	res.render('index_connected', {title : "Root"});
+	res.render('index_not_connected', {title : "Root"});
 	//res.render('index_connected', {title : "Root"});
 });
 
