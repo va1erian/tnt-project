@@ -37,18 +37,10 @@ router.get( '/bookmarkedjourney', bookdJourney.getAllBookmarkedJourney );
 // add abookmarked journey
 router.post('/bookmarkedjourney', bookdJourney.addBookmarkedJourney );
 // delete a bookmarked journey
-<<<<<<< HEAD
+
 router.get( '/bookmarkedjourney/:idJourney', function(req, res) {});
 
 
-router.get( '/test', function(req, res) {
-	res.render( 'test' );
-});
-router.get( '/testangular', function(req, res) {
-	res.render( 'testangular' );
-});
-
-=======
 router.get( '/bookmarkedjourney/:idJourney', bookdJourney.deleteBookmarkedJourney );
 
 /* Addresses */
@@ -60,6 +52,14 @@ router.get( '/address/add', addresses.addAddress );
 router.get( '/address/delete', addresses.deleteAddress );
 // add the address
 router.get( '/address/all', addresses.getListAddresses );
->>>>>>> refs/remotes/origin/master
+
+
+router.get( '/test', function(req, res) {
+	res.render( 'test' );
+});
+router.get( '/testangular', function(req, res) {
+	res.render( 'testangular' );
+});
+
 
 module.exports = router;
