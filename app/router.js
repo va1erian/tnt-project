@@ -6,6 +6,11 @@ router.get(	'/', function(req, res) {
 	res.render('index', {title : "Yazid"});
 });
 
+// Index non connecté (TEST)
+router.get(	'/index_not_connected.html', function(req, res) {
+	res.render('index_not_connected', {title : "Yazid"});
+});
+
 /* Login */
 
 // Sign up
