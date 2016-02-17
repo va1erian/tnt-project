@@ -1,7 +1,7 @@
 var app = angular.module('tntApp', []);
 app.controller('tntCtrl', function($scope, $http)
 {
-	$scope.URL = "http://" + window.location.hostname + ":3000";
+	$scope.URL = "http://" + window.location.hostname + ":3000/tnt";
 
 	var url = $scope.URL + '/test';
 	
