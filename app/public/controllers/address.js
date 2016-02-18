@@ -24,8 +24,8 @@ app.controller('addressCtrl', function($scope, $http)
             .success(function (data, status, headers, config) {
                 if(data.success) {
                     $scope.confirmedAddress = data;
+                    $('#addr_validationBlock').fadeIn(200);
                     $('#addNewAddress input').prop('disabled', true);
-                    $('#validateAddress').show();
                 }
                 else {
 
@@ -62,6 +62,10 @@ app.controller('addressCtrl', function($scope, $http)
             .success(function (data, status, headers, config) {
                 if(data.success) {
                     $scope.listAddresses();
+                    $('#addr_validationBlock').fadeOut(200, function() {
+                        $scope.confirmedAddress = '';
+                    });
+                    $('#addNewAddress input').prop('disabled', false);
                 }
                 else {
                     
@@ -71,6 +75,13 @@ app.controller('addressCtrl', function($scope, $http)
             {
                 $scope.errorMessage = "SUBMIT ERROR";
             });
+    }
+
+    $scope.cancelAddress = function() {
+        $('#addr_validationBlock').fadeOut(200, function() {
+            $scope.confirmedAddress = '';
+        });
+        $('#addNewAddress input').prop('disabled', false);
     }
 
 
