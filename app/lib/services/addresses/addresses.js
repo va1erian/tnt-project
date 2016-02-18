@@ -18,7 +18,7 @@ exports.checkAddress = function(req, res) {
 };
 
 exports.addAddress = function(req, res) {
-	//res.render('index', {title : "addAddress"});
+	res.status(200).json({success: true});
 };
 
 exports.deleteAddress = function(req, res) {

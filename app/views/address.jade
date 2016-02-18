@@ -10,18 +10,10 @@ block content
       .container
         .row
           .col-md-12
-            ul.breadcrumb
-              li
-                a(href='#') Accueil
-              li.active Mes adresses
-    .section
-      .container
-        .row
-          .col-md-12
             h1 Ajouter une nouvelle adresse
         .row
           .col-md-6
-            form(role='form')
+            form(role='form', id='addNewAddress')
               .form-group
                 label.control-label(for='exampleInputEmail1') Nom de l'adresse
                 input#exampleInputEmail1.form-control(placeholder='Exemple : Maison', type='email')
@@ -47,7 +39,7 @@ block content
           .col-md-6
             p {{ confirmedAddress.formattedAddress }}
             img(border='0', ng-src="//maps.googleapis.com/maps/api/staticmap?center={{confirmedAddress.gps.gpsLatitude}},{{confirmedAddress.gps.gpsLongitude}}&markers=color:red%7Clabel:A%7C{{confirmedAddress.gps.gpsLatitude}},{{confirmedAddress.gps.gpsLongitude}}&zoom=12&size=550x200")
-            button.btn.btn-block.btn-lg.btn-success(type='submit', id='validateAddress', style='display:none;') Valider
+            button.btn.btn-block.btn-lg.btn-success(type='submit', id='validateAddress', ng-click='addAddress(confirmedAddress.formattedAddress);', style='display:none;') Valider
     .section
       .container
         .row
