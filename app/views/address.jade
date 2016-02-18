@@ -4,22 +4,8 @@ block content
 
   div(ng-app='tntApp', ng-controller='addressCtrl')
 
-    .navbar.navbar-default.navbar-static-top
-      .container
-        .navbar-header
-          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navbar-ex-collapse')
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.navbar-brand(href='#')
-            span TnT
-        #navbar-ex-collapse.collapse.navbar-collapse
-          ul.nav.navbar-nav.navbar-right
-            li
-              a(href='#') Accueil
-            li.active
-              a(href='#') Mon Compte
+    include top_menu.jade
+
     .section
       .container
         .row
@@ -83,6 +69,6 @@ block content
                     td {{ address.city }}
                     td {{ address.postalCode }}
                     td {{ address.country }}
-                    td x
+                    td(ng-click='deleteAddress(address.idAddress);') x
 
     script(src='/controllers/address.js')

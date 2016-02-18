@@ -20,8 +20,26 @@ app.controller('addressCtrl', function($scope, $http)
 
         $http.get(url)
             .success(function (data, status, headers, config) {
-                $scope.confirmedAddress = data;
-                $('#validateAddress').show();
+                //if(data.success) {
+                    $scope.confirmedAddress = data;
+                    $('#validateAddress').show();
+               /* }
+                else {
+
+                }*/
+            })
+            .error(function (data, status, headers, config)
+            {
+                $scope.errorMessage = "SUBMIT ERROR";
+            });
+    }
+
+    $scope.deleteAddress = function(id) {
+        var url = $scope.URL + '/address/delete?'+id;
+
+        $http.get(url)
+            .success(function (data, status, headers, config) {
+                $scope.addressesList = data;
             })
             .error(function (data, status, headers, config)
             {

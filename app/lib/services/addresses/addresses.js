@@ -6,7 +6,7 @@ exports.renderAddress = function(req, res) {
 };
 
 exports.checkAddress = function(req, res) {
-	res.status(200).json({bool: true, formattedAddress: "8 Avenue du superbe Kiabi, Saumur, 91000", gps: {gpsLatitude:47.279127,gpsLongitude:-0.064639}});
+	res.status(200).json({success: true, formattedAddress: "8 Avenue du superbe Kiabi, Saumur, 91000", gps: {gpsLatitude:47.279127,gpsLongitude:-0.064639}});
 };
 
 exports.addAddress = function(req, res) {
@@ -14,7 +14,7 @@ exports.addAddress = function(req, res) {
 };
 
 exports.deleteAddress = function(req, res) {
-	//res.render('index', {title : "deleteAddress"});
+	res.status(200).json({success: true});
 };
 
 exports.getListAddresses = function(req, res) {
