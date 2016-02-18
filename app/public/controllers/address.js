@@ -20,13 +20,13 @@ app.controller('addressCtrl', function($scope, $http)
 
         $http.get(url)
             .success(function (data, status, headers, config) {
-                //if(data.success) {
+                if(data.success) {
                     $scope.confirmedAddress = data;
                     $('#validateAddress').show();
-               /* }
+                }
                 else {
 
-                }*/
+                }
             })
             .error(function (data, status, headers, config)
             {
