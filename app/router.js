@@ -6,20 +6,8 @@ var profil = require('./lib/services/user/profil');
 var bookdJourney = require('./lib/services/journey/bookmarkedJourney');
 var addresses = require('./lib/services/addresses/addresses');
 
-var user =
-{
-	firstName: "Dummy",
-	lastName: "Dummy",
-	birthDate: "",
-	gender: "", // GENRE : M ou F
-	email: "",
-	password: ""
-};
-
 // Index
-router.get('/index_not_connected.html', function(req, res) {
-	res.render('index_not_connected', {title : "Root"});
-});
+router.get(	'/', login.index);
 
 /* Login */
 
