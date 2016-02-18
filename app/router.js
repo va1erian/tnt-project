@@ -6,10 +6,23 @@ var profil = require('./lib/services/user/profil');
 var bookdJourney = require('./lib/services/journey/bookmarkedJourney');
 var addresses = require('./lib/services/addresses/addresses');
 
+var user =
+{
+	firstName: "Dummy",
+	lastName: "Dummy",
+	birthDate: "",
+	gender: "", // GENRE : M ou F
+	email: "",
+	password: ""
+};
+
 // Index
 router.get(	'/', function(req, res) {
-	res.render('index_connected', {title : "Root"});
-	//res.render('index_connected', {title : "Root"});
+	res.render('index_connected', {title : "Root", user : user});
+});
+
+router.get('/index_not_connected.html', function(req, res) {
+	res.render('index_not_connected', {title : "Root"});
 });
 
 /* Login */

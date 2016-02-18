@@ -10,7 +10,7 @@ block content
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='index.html') TnT
+          a.navbar-brand(href='index_not_connected.html') TnT
             span.glyphicon.glyphicon-map-marker(aria-hidden='true')
         nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
           ul.nav.navbar-nav.navbar-right
@@ -26,58 +26,68 @@ block content
           .modal-header
             button.close(type='button', data-dismiss='modal') ×
             h4.modal-title Connexion
-            .modal-body.container
-              form.form-horizontal(role='form', ng-submit='signin()')
-                .form-group
-                  label.col-sm-2.control-label(for='login_email') E-mail
-                  .col-sm-4
-                    input#login_email.form-control(type='text', placeholder='E-mail', ng-model='signin_form.email')
-                .form-group
-                  label.col-sm-2.control-label(for='login_password') Mot de passe
-                  .col-sm-4
-                    input#login_password.form-control(type='password', placeholder='Mot de passe', ng-model='signin_form.password')
-                .form-group
-                  .col-sm-offset-2.col-sm-10
-                    button.btn.btn-success(type='submit') Connexion
+          .modal-body
+            #signin-alert
+            form.form-horizontal(role='form', ng-submit='signin()')
+              .form-group
+                label.col-sm-3.control-label(for='login_email') E-mail
+                .col-sm-9
+                  input#login_email.form-control(type='text', placeholder='E-mail', ng-model='signin_form.email')
+              .form-group
+                label.col-sm-3.control-label(for='login_password') Mot de passe
+                .col-sm-9
+                  input#login_password.form-control(type='password', placeholder='Mot de passe', ng-model='signin_form.password')
+              .form-group
+                .col-sm-offset-3.col-sm-9
+                  button.btn.btn-success(type='submit') Connexion
   
     #signup-modal.modal.fade(role='dialog')
-      .modal-dialog
+      .modal-dialog.modal-lg
         .modal-content
           .modal-header
             button.close(type='button', data-dismiss='modal') ×
             h4.modal-title Inscription
-          .modal-body.container
+          .modal-body
+            #signup-alert
             form.form-horizontal(role='form', ng-submit='signup()')
               .form-group
-                label.col-sm-2.control-label(for='signup_email') E-mail
-                .col-sm-4
+                label.col-sm-3.control-label(for='signup_email') E-mail
+                .col-sm-9
                   input#signup_email.form-control(type='email', placeholder='E-mail', ng-model='signup_form.email')
               .form-group
-                label.col-sm-2.control-label(for='signup_firstname') Prénom
-                .col-sm-4
-                  input#signup_firstname.form-control(type='text', placeholder='Prénom', ng-model='signup_form.firstname')
+                label.col-sm-3.control-label(for='signup_firstname') Prénom
+                .col-sm-9
+                  input#signup_firstname.form-control(type='text', placeholder='Prénom', ng-model='signup_form.firstName')
               .form-group
-                label.col-sm-2.control-label(for='signup_lastname') Nom de famille
-                .col-sm-4
-                  input#signup_lastname.form-control(type='text', placeholder='Nom de famille', ng-model='signup_form.lastname')
+                label.col-sm-3.control-label(for='signup_lastname') Nom de famille
+                .col-sm-9
+                  input#signup_lastname.form-control(type='text', placeholder='Nom de famille', ng-model='signup_form.lastName')
               .form-group
-                label.col-sm-2.control-label(for='signup_birthdate') Date de naissance
-                .col-sm-4
-                  input#signup_birthdate.form-control(type='text', placeholder='JJ/MM/YYYY', ng-model='signup_form.birthdate')
+                label.col-sm-3.control-label(for='signup_birthDate') Date de naissance
+                .col-sm-9
+                  input#signup_birthdate.form-control(type='text', placeholder='JJ/MM/YYYY', ng-model='signup_form.birthDate')
               .form-group
-                label.col-sm-2.control-label(for='signup_password') Mot de passe
-                .col-sm-4
+                label.col-sm-3.control-label(for='signup_password') Mot de passe
+                .col-sm-9
                   input#signup_password.form-control(type='password', placeholder='Mot de passe', ng-model='signup_form.password')
               .form-group
-                label.col-sm-2.control-label Genre
-                .col-sm-4
+                label.col-sm-3.control-label(for='signup_password_confirmation') Confirmation
+                .col-sm-9
+                  input#signup_password.form-control(type='password', placeholder='Confirmation du mot de passe', ng-model='signup_password_confirmation')
+              .form-group
+                label.col-sm-3.control-label Genre
+                .col-sm-9
                   label.radio-inline
-                    input(type='radio', name='gender', ng-model='signup_form.gender', value='H')
+                    input(type='radio', name='gender', ng-model='signup_form.gender', value='M')
                     span Homme
                   label.radio-inline
                     input(type='radio', name='gender', ng-model='signup_form.gender', value='F')
                     span Femme
               .form-group
-                .col-sm-offset-2.col-sm-10
+                .col-sm-offset-3.col-sm-9
                   button.btn.btn-success(type='submit') S'inscrire
+  
+    .container-fluid 
+      p Ajouter des informations sur la page d'accueil de l'utilisateur non connecté.
+
   script(src='/javascripts/index_not_connected.js')

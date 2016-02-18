@@ -1,0 +1,27 @@
+// Menu horizontal utilisé pour les parties connectées
+header.navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
+  .container
+    .navbar-header
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand(href='/tnt') TnT
+    nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+      ul.nav.navbar-nav.navbar-right
+        li
+          a(href='#') #{user.lastName} #{user.lastName}
+        // Trajets
+        li
+          a(href='/tnt/journey') Mes trajets
+        // Gestion
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            | Options 
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='/tnt/profil') Mon profil
+            li
+              a(href='#') Se déconnecter
