@@ -19,13 +19,14 @@ app.controller('addressCtrl', function($scope, $http)
         var url = $scope.URL + '/address/check';
 
         $http.get(url)
-        .success(function (data, status, headers, config) {
-            alert(data);
-        })
-        .error(function (data, status, headers, config)
-        {
-            $scope.errorMessage = "SUBMIT ERROR";
-        });
+            .success(function (data, status, headers, config) {
+                $scope.confirmedAddress = data;
+                $('#validateAddress').show();
+            })
+            .error(function (data, status, headers, config)
+            {
+                $scope.errorMessage = "SUBMIT ERROR";
+            });
     }
 
 

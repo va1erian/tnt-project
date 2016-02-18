@@ -59,9 +59,9 @@ block content
                     input#exampleInputEmail1.form-control(placeholder='Nom de ville', type='text')
               button.btn.btn-block.btn-lg.btn-warning(type='submit', ng-click='checkAddress();') Pré-valider
           .col-md-6
-            p Adresse formatée par Google
-            img.img-responsive(src='http://maps.googleapis.com/maps/api/staticmap?center=Paris,France&zoom=12&size=550x200&sensor=false')
-            button.btn.btn-block.btn-lg.btn-success(type='submit') Valider
+            p {{ confirmedAddress.formattedAddress }}
+            img(border='0', ng-src="//maps.googleapis.com/maps/api/staticmap?center={{confirmedAddress.gps.gpsLatitude}},{{confirmedAddress.gps.gpsLongitude}}&markers=color:red%7Clabel:A%7C{{confirmedAddress.gps.gpsLatitude}},{{confirmedAddress.gps.gpsLongitude}}&zoom=12&size=550x200")
+            button.btn.btn-block.btn-lg.btn-success(type='submit', id='validateAddress', style='display:none;') Valider
     .section
       .container
         .row
