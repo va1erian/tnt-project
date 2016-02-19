@@ -47,6 +47,8 @@ app.controller('tntHomeCtrl', function($scope, $http)
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 	
+	/// Permet d'afficher ou de masquer le bouton de chargement dans le formulaire d'inscription,
+	/// ainsi que de disable ou non le formulaire.
     $scope.loadSignup = function(loading)
     {
     	if(loading)
@@ -68,44 +70,44 @@ app.controller('tntHomeCtrl', function($scope, $http)
 	{
 		if($scope.signup_form.firstName.length == 0)
 		{
-			$scope.addSignupAlert('Vous devez renseigner votre prénom.');
+			$scope.addSignupAlert('Vous devez renseigner votre prénom.', 'alert-danger');
 			return;
 		}
 		else if($scope.signup_form.lastName.length == 0)
 		{
-			$scope.addSignupAlert('Vous devez renseigner votre nom de famille.');
+			$scope.addSignupAlert('Vous devez renseigner votre nom de famille.', 'alert-danger');
 			return;
 		}
 		else if($scope.signup_form.birthDate.length == 0)
 		{
 			//TODO: vérifier format date de naissance
-			$scope.addSignupAlert('Vous devez renseigner votre date de naissance.');
+			$scope.addSignupAlert('Vous devez renseigner votre date de naissance.', 'alert-danger');
 			return;
 		}
 		else if($scope.signup_form.gender.length == 0)
 		{
-			$scope.addSignupAlert('Vous devez renseigner votre sexe.');
+			$scope.addSignupAlert('Vous devez renseigner votre sexe.', 'alert-danger');
 			return;
 		}
 		else if($scope.signup_form.email.length == 0)
 		{
 			//TODO: vérifier format adresse e-mail
-			$scope.addSignupAlert('Vous devez renseigner votre e-mail.');
+			$scope.addSignupAlert('Vous devez renseigner votre e-mail.', 'alert-danger');
 			return;
 		}
 		else if($scope.signup_form.password.length == 0)
 		{
-			$scope.addSignupAlert('Vous devez renseigner votre mot de passe.');
+			$scope.addSignupAlert('Vous devez renseigner votre mot de passe.', 'alert-danger');
 			return;
 		}
 		else if($scope.signup_password_confirmation != $scope.signup_form.password)
 		{
-			$scope.addSignupAlert('Les deux mots de passe ne sont pas identiques');
+			$scope.addSignupAlert('Les deux mots de passe ne sont pas identiques', 'alert-danger');
 			return;
 		}
 		else if($scope.signup_form.password.length < 6)
 		{
-			$scope.addSignupAlert('Le mot de passe est trop court, il doit être composé d\'au moins 6 caractères.');
+			$scope.addSignupAlert('Le mot de passe est trop court, il doit être composé d\'au moins 6 caractères.', 'alert-danger');
 			return;
 		}
 		else
@@ -113,46 +115,27 @@ app.controller('tntHomeCtrl', function($scope, $http)
 			$("#signup-alert").hide();
 		}
 
-		/*alert($scope.signup_form.firstName + " " +
-			  $scope.signup_form.lastName + " " +
-			  $scope.signup_form.birthDate + " " +
-			  $scope.signup_form.gender + " " + 
-		      $scope.signup_form.email + " " +
-		      $scope.signup_form.password);*/
-
 		$scope.loadSignup(true);
 
-		// Envoyer une requête ajax en post vers /tnt/signup avec
-		alert($scope.URL + "/signup");
 		$http.post($scope.URL + "/signup", null, $scope.signup_form)
 			.success(function(data, status, headers, config)
 			{
 			    if(data.success)
 			    {
-			    	// Afficher un message de succès
+			    	$scope.addSignupAlert("Inscription réussie. Vous allez recevoir un e-mail de confirmation.", 'alert-success')
 			    }
 			    else
 			    {
-			    	// Afficher les messages d'erreur
-			    	addSignupAlert(data.errors.join(' | '));
+			    	$scope.addSignupAlert(data.errors.join(' | '), 'alert-danger');
 			    }
 
 			    $scope.loadSignup(false);
 			})
 			.error(function(data, status, headers, config)
 			{
-				console.log("DATA\n" + data);
-				console.log("STATUS\n" + status);
-				console.log("HEADERS\n" + headers);
-				console.log("CONFIG\n" + config);
-
-				$scope.addSignupAlert('Erreur ' + status + ', impossible de contacter le serveur. Essayez plus tard.');
-
-			    // Afficher les messages d'erreurs
-				 $scope.loadSignup(false);
+				$scope.addSignupAlert('Erreur ' + status + ', impossible de contacter le serveur. Essayez plus tard.', 'alert-danger');
+				$scope.loadSignup(false);
 			});
-			 
-
 	}
 
 	/// Méthode utilisée pour la connexion
@@ -160,12 +143,12 @@ app.controller('tntHomeCtrl', function($scope, $http)
 	{
 		if($scope.signin_form.email.length == 0)
 		{
-			$scope.addSigninAlert("Vous devez renseigner votre adresse e-mail.");
+			$scope.addSigninAlert("Vous devez renseigner votre adresse e-mail.", 'alert-danger');
 			return;
 		}
 		else if($scope.signin_form.password.length == 0)
 		{
-			$scope.addSigninAlert("Vous devez renseigner votre mot-de-passe.");
+			$scope.addSigninAlert("Vous devez renseigner votre mot-de-passe.", 'alert-danger');
 			return;
 		}
 		else
@@ -173,25 +156,44 @@ app.controller('tntHomeCtrl', function($scope, $http)
 			$("#signin-alert").hide();
 		}
 
-		alert($scope.signin_form.email + " " +
-			  $scope.signin_form.password);
+		$http.post($scope.URL + "/signin", null, $scope.signin_form)
+			.success(function(data, status, headers, config)
+			{
 
-		//TODO: Ajax
+			    if(data.success)
+			    {
+			    	// Rediriger l'utilisateur vers la page d'accueil connecté
+			    	window.location.replace(URL);
+			    }
+			    else
+			    {
+			    	// Afficher les messages d'erreur
+			    	$scope.addSignupAlert(data.error, 'alert-danger');
+			    }
+
+			    $scope.loadSignup(false);
+			})
+			.error(function(data, status, headers, config)
+			{
+				$scope.addSignupAlert('Erreur ' + status + ', impossible de contacter le serveur. Essayez plus tard.', 'alert-danger');
+				$scope.loadSignup(false);
+			});
 	}
 
-	$scope.addSignupAlert = function(message)
+	$scope.addSignupAlert = function(message, type)
 	{
 		$('#signup-alert').show();
 	    $('#signup-alert').html( 
-	        '<div class="alert alert-danger fadein">' +
+	        '<div class="alert ' + type + ' fadein">' +
 	            '<a href="#" class="close" data-dismiss="alert">' +
 	            '&times;</a>' + message + '</div>');
 	}
 
-	$scope.addSigninAlert = function(message)
+	$scope.addSigninAlert = function(message, type)
 	{
+		$('#signin-alert').show();
 	    $('#signin-alert').html( 
-	        '<div class="alert alert-danger fadein">' +
+	        '<div class="alert ' + type + ' fadein">' +
 	            '<a href="#" class="close" data-dismiss="alert">' +
 	            '&times;</a>' + message + '</div>');
 	}
