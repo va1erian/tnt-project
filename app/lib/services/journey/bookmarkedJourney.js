@@ -12,3 +12,7 @@ exports.addBookmarkedJourney = function(req, res) {
 exports.deleteBookmarkedJourney = function(req, res) {
 	res.render('journey', {title : "deleteBookmarkedJourney"});
 };
+
+exports.deleteBookmarkedJourney = function(req, res) {
+	res.render('journey', {title : "deleteBookmarkedJourney"});
+};

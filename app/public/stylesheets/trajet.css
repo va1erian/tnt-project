@@ -1,0 +1,38 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#map {
+  height: 80%;
+  float: left;
+  width: 900px;
+  height: 600px;
+}
+#info-panel {
+  float: center;
+  width: 100%;
+  height: 20%;
+}
+#info-panel {
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+}
+
+#info-panel select, #info-panel input {
+  font-size: 15px;
+}
+
+#info-panel select {
+  width: 100%;
+}
+
+#info-panel i {
+  font-size: 12px;
+}
+
+.panel {
+  height: 100%;
+  overflow: auto;
+}
