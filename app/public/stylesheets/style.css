@@ -34,7 +34,7 @@ a {
 @keyframes spin { from { transform: scale(1) rotate(0deg);} to { transform: scale(1) rotate(360deg);}}
 
 #error-alert { width: auto; }
-#signup_loading { display: none; }
+.loading-btn { display: none; }
 
 #addr_validationBlock_list {
 	display: none;
