@@ -11,10 +11,8 @@ router.get('/index_not_connected.html', function(req, res) {
 	res.render('index_not_connected', {title : "Root"});
 });
 
-router.get(	'/', login.index);
-
-
 /* Login */
+router.get(	'/', login.index);
 
 // Sign up
 router.post('/signup', login.createUser );
