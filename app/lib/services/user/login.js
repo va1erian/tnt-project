@@ -17,7 +17,7 @@ exports.index = function (req, res) {
 exports.createUser = function (req, res) {
 
     var data = req.body;
-    validator(data, function (errors) {
+    validator.validateUser(data, function (errors) {
         if (errors) {
             res.status(500).json({success: false, errors: errors});
         }
