@@ -6,24 +6,13 @@ var profil = require('./lib/services/user/profil');
 var bookdJourney = require('./lib/services/journey/bookmarkedJourney');
 var addresses = require('./lib/services/addresses/addresses');
 
-var user =
-{
-	firstName: "Dummy",
-	lastName: "Dummy",
-	birthDate: "",
-	gender: "", // GENRE : M ou F
-	email: "",
-	password: ""
-};
-
 // Index
-router.get(	'/', function(req, res) {
-	res.render('index_connected', {title : "Root", user : user});
-});
-
 router.get('/index_not_connected.html', function(req, res) {
 	res.render('index_not_connected', {title : "Root"});
 });
+
+router.get(	'/', login.index);
+
 
 /* Login */
 
@@ -59,14 +48,16 @@ router.get( '/bookmarkedjourney/:idJourney', bookdJourney.deleteBookmarkedJourne
 /* Addresses */
 // addresses management main page
 router.get( '/address', addresses.renderAddress );
-// check if the address exists
+// check if the address exists and get all the formatted addresses
 router.get( '/address/check', addresses.checkAddress );
 // add the address
 router.get( '/address/add', addresses.addAddress );
 // delete the address
-router.get( '/address/delete', addresses.deleteAddress );
+router.get( '/address/delete/:idAddress', addresses.deleteAddress );
 // add the address
+// get the list of all thr addresses of the user
 router.get( '/address/all', addresses.getListAddresses );
-
+// render the modal of the adresses
+router.get( '/address/getModal', addresses.getAddressModal );
 
 module.exports = router;
