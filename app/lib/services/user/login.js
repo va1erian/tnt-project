@@ -19,7 +19,7 @@ exports.createUser = function (req, res) {
     var data = req.body;
     validator.validateUser(data, function (errors) {
         if (errors) {
-            res.status(500).json({success: false, errors: errors});
+            res.status(200).json({success: false, errors: errors});
         }
         else {
             logger.debug('Encrypting the password');
