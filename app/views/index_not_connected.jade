@@ -49,7 +49,7 @@ block content
             h4.modal-title Inscription
           .modal-body
             #signup-alert
-            form.form-horizontal(role='form', ng-submit='signup()')
+            form#signup_form.form-horizontal(role='form', ng-submit='signup()')
               .form-group
                 label.col-sm-3.control-label(for='signup_email') E-mail
                 .col-sm-9
@@ -85,7 +85,10 @@ block content
                     span Femme
               .form-group
                 .col-sm-offset-3.col-sm-9
-                  button.btn.btn-success(type='submit') S'inscrire
+                  button#signup_send.btn.btn-success(type='submit') S'inscrire
+                  button#signup_loading.btn
+                    span.glyphicon.glyphicon-refresh.glyphicon-refresh-animate
+                    |  Chargement...
   
     .container-fluid 
       p Ajouter des informations sur la page d'accueil de l'utilisateur non connecté.

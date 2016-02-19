@@ -4,5 +4,50 @@ block content
 
   include top_menu.jade
 
-  .container-fluid
-    p Cette page permet de modifier votre profil.
+  div(ng-app='tntApp', ng-controller='tntUpdateProfileCtrl')
+    
+    .container-fluid
+      h2 Mettre à jour mon profil  
+
+      form(role='form', ng-submit='signup()')
+        .form-group
+          label.col-sm-3.control-label(for='signup_firstname') Prénom
+          .col-sm-9
+            input#signup_firstname.form-control(type='text', placeholder='Prénom', ng-model='signup_form.firstName')
+            br
+        .form-group
+          label.col-sm-3.control-label(for='signup_lastname') Nom de famille
+          .col-sm-9
+            input#signup_lastname.form-control(type='text', placeholder='Nom de famille', ng-model='signup_form.lastName')
+            br
+        .form-group
+          label.col-sm-3.control-label(for='signup_birthDate') Date de naissance
+          .col-sm-9
+            input#signup_birthdate.form-control(type='text', placeholder='JJ/MM/YYYY', ng-model='signup_form.birthDate')
+            br
+        .form-group
+          label.col-sm-3.control-label(for='signup_password') Mot de passe
+          .col-sm-9
+            input#signup_password.form-control(type='password', placeholder='Mot de passe', ng-model='signup_form.password')
+            br
+        .form-group
+          label.col-sm-3.control-label(for='signup_password_confirmation') Confirmation
+          .col-sm-9
+            input#signup_password.form-control(type='password', placeholder='Confirmation du mot de passe', ng-model='signup_password_confirmation')
+            br
+        .form-group
+          label.col-sm-3.control-label Genre
+          .col-sm-9
+            label.radio-inline
+              input(type='radio', name='gender', ng-model='signup_form.gender', value='M')
+              span Homme
+            label.radio-inline
+              input(type='radio', name='gender', ng-model='signup_form.gender', value='F')
+              span Femme
+        .form-group
+          .col-sm-offset-3.col-sm-9
+            br
+            button#signup_send.btn.btn-success(type='submit') Enregistrer les modifications
+            button#update_profile_loading.btn.loading-btn
+              span.glyphicon.glyphicon-refresh.glyphicon-refresh-animate
+              |  Chargement...  
