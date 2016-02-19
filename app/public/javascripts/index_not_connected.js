@@ -4,8 +4,6 @@
 var app = angular.module('tntApp', []);
 app.controller('tntHomeCtrl', function($scope)
 {
-	$scope.displayLoadingAnimation = false;
-
 	$scope.errorMessage = "test";
 
 	/// Wrapper contenant les informations du formulaire d'inscription.
@@ -36,6 +34,22 @@ app.controller('tntHomeCtrl', function($scope)
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 	
+    $scope.loadSignup = function(loading)
+    {
+    	if(loading)
+    	{
+    		$("#signup_loading").show();
+			$("#signup_send").hide();
+			$("#signup_form input").prop("disabled", true);
+    	}
+    	else
+    	{
+    		$("#signup_loading").hide();
+			$("#signup_send").show();
+			$("#signup_form input").prop("disabled", false);
+    	}
+    }
+
 	/// Méthode utilisée pour l'inscription
 	$scope.signup = function()
 	{
@@ -92,12 +106,36 @@ app.controller('tntHomeCtrl', function($scope)
 		      $scope.signup_form.email + " " +
 		      $scope.signup_form.password);*/
 
-		$scope.displayLoadingAnimation = true;
+		$scope.loadSignup(true);
 
 		//TODO: Ajax
 		// Envoyer une requête ajax en post vers /tnt/signup avec
 
-		$scope.displayLoadingAnimation = false;
+		$http(
+		{
+		    url: "/tnt/signup",
+		    method: "POST",
+		    data: $scope.signup_form
+		})
+		.success(function(data, status, headers, config)
+		{
+		    if(data.success)
+		    {
+		    	// Afficher un message de succès
+		    }
+		    else
+		    {
+		    	// Afficher les messages d'erreur
+		    	addSignupAlert(data.errors.join(' | '));
+		    }
+
+		    $scope.loadSignup(false);
+		})
+		.error(function(data, status, headers, config)
+		{
+		    // Afficher les messages d'erreurs
+			 $scope.loadSignup(false);
+		});
 	}
 
 	/// Méthode utilisée pour la connexion
