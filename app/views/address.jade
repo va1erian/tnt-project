@@ -10,18 +10,10 @@ block content
       .container
         .row
           .col-md-12
-            ul.breadcrumb
-              li
-                a(href='#') Accueil
-              li.active Mes adresses
-    .section
-      .container
-        .row
-          .col-md-12
             h1 Ajouter une nouvelle adresse
         .row
           .col-md-6
-            form(role='form')
+            form(role='form', id='addNewAddress')
               .form-group
                 label.control-label(for='exampleInputEmail1') Nom de l'adresse
                 input#exampleInputEmail1.form-control(placeholder='Exemple : Maison', type='email')
@@ -43,11 +35,16 @@ block content
                   .form-group
                     label.control-label(for='exampleInputEmail1') Ville
                     input#exampleInputEmail1.form-control(placeholder='Nom de ville', type='text')
-              button.btn.btn-block.btn-lg.btn-warning(type='submit', ng-click='checkAddress();') Pré-valider
+              button.btn.btn-block.btn-lg.btn-warning(type='submit', id='addr_prevalidation', ng-click='checkAddress();') Pré-valider
           .col-md-6
-            p {{ confirmedAddress.formattedAddress }}
-            img(border='0', ng-src="//maps.googleapis.com/maps/api/staticmap?center={{confirmedAddress.gps.gpsLatitude}},{{confirmedAddress.gps.gpsLongitude}}&markers=color:red%7Clabel:A%7C{{confirmedAddress.gps.gpsLatitude}},{{confirmedAddress.gps.gpsLongitude}}&zoom=12&size=550x200")
-            button.btn.btn-block.btn-lg.btn-success(type='submit', id='validateAddress', style='display:none;') Valider
+            #addr_validationBlock
+              p {{ confirmedAddress.formattedAddress }}
+              img(border='0', ng-src="//maps.googleapis.com/maps/api/staticmap?center={{confirmedAddress.gps.gpsLatitude}},{{confirmedAddress.gps.gpsLongitude}}&markers=color:red%7Clabel:A%7C{{confirmedAddress.gps.gpsLatitude}},{{confirmedAddress.gps.gpsLongitude}}&zoom=12&size=550x200")
+              #addressValidationButtons
+                .col-md-4
+                  button.btn.btn-block.btn-lg.btn-success(type='submit', ng-click='cancelAddress();') &lsaquo;&lsaquo;
+                .col-md-8
+                  button.btn.btn-block.btn-lg.btn-success(type='submit', ng-click='addAddress(confirmedAddress.formattedAddress);') Valider
     .section
       .container
         .row

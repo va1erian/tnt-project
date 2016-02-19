@@ -35,4 +35,14 @@ a {
 
 #error-alert { width: auto; }
 
-#signup_loading { display: none; }
+#addr_validationBlock {
+	display: none;
+}
+
+#addressValidationButtons {
+	margin-top: 1em;
+}
+
+#addr_prevalidation {
+	margin-top: 1.65em;
+}
