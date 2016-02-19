@@ -43,14 +43,15 @@ router.get( '/bookmarkedjourney/:idJourney', bookdJourney.deleteBookmarkedJourne
 /* Addresses */
 // addresses management main page
 router.get( '/address', addresses.renderAddress );
-// check if the address exists
+// check if the address exists and get all the formatted addresses
 router.get( '/address/check', addresses.checkAddress );
 // add the address
 router.get( '/address/add', addresses.addAddress );
 // delete the address
 router.get( '/address/delete/:idAddress', addresses.deleteAddress );
-// add the address
+// get the list of all thr addresses of the user
 router.get( '/address/all', addresses.getListAddresses );
-
+// render the modal of the adresses
+router.get( '/address/all', addresses.getAddressModal );
 
 module.exports = router;
