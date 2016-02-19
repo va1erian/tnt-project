@@ -45,6 +45,12 @@ app.controller('tntHomeCtrl', function($scope, $http)
 		password: ""
 	};
 
+	/// E-mail du formulaire du mot de passe oublié
+	$scope.lost_password_email = 
+	{
+		email: ""
+	};
+
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 	
 	/// Permet d'afficher ou de masquer le bouton de chargement dans le formulaire d'inscription,
@@ -91,7 +97,6 @@ app.controller('tntHomeCtrl', function($scope, $http)
 		}
 		else if($scope.signup_form.email.length == 0)
 		{
-			//TODO: vérifier format adresse e-mail
 			$scope.addSignupAlert('Vous devez renseigner votre e-mail.', 'alert-danger');
 			return;
 		}
@@ -136,6 +141,67 @@ app.controller('tntHomeCtrl', function($scope, $http)
 				$scope.addSignupAlert('Erreur ' + status + ', impossible de contacter le serveur. Essayez plus tard.', 'alert-danger');
 				$scope.loadSignup(false);
 			});
+
+		// Clear le formulaire (éviter que l'utilisateur spam le bouton)
+		$scope.signup_form = { firstName: "", lastName: "", birthDate: "", gender: "", email: "", password: "" };
+		$scope.signup_password_confirmation = "";
+	}
+
+	/// Fonction permettant d'afficher/masquer le formulaire de mot de passe oublié
+	$scope.displayLostPassword = function(display)
+	{
+		$("#signin-alert").hide();
+
+		if(!display)
+		{
+			$('#login_form').show();
+			$('#forgotten_password_form').hide();
+		}
+		else
+		{
+			$('#login_form').hide();
+			$('#forgotten_password_form').show();
+		}
+	}
+
+	$scope.askLostPassword = function()
+	{
+		if($scope.lost_password_email.email.length == 0)
+		{
+			$scope.addSigninAlert("Vous devez renseigner votre mot de passe.", 'alert-danger');
+			return;
+		}
+		else 
+		{
+			$("#signin-alert").hide();
+		}
+
+		// Envoi en Ajax
+		
+		$http.post($scope.URL + "/passwd/lost", $scope.lost_password_email)
+			.success(function(data, status, headers, config)
+			{
+			    if(data.success)
+			    {
+			    	$scope.displayLostPassword(false);
+					$scope.addSigninAlert("Un message expliquant comment réinitialiser le mot de passe a été envoyé à l'adresse <strong>" + $scope.lost_password_email + "</strong>.", 'alert-success');
+					$scope.lost_password_email = "";
+					$scope.loadSignup(false);
+			    }
+			    else
+			    {
+			    	$scope.displayLostPassword(false);
+					$scope.addSigninAlert("L'adresse <strong>" + $scope.lost_password_email + "</strong> ne correspond à aucun utilisateur.", 'alert-danger');
+			    }
+			})
+			.error(function(data, status, headers, config)
+			{
+				$scope.addSignupAlert('Erreur ' + status + ', impossible de contacter le serveur. Essayez plus tard.', 'alert-danger');
+			});
+
+		// Reception du message : l'e-mail est-il valide?
+
+		// Si valide, afficher message indiquant que l'action a été effectuée
 	}
 
 	/// Méthode utilisée pour la connexion
@@ -159,7 +225,6 @@ app.controller('tntHomeCtrl', function($scope, $http)
 		$http.post($scope.URL + "/signin", $scope.signin_form)
 			.success(function(data, status, headers, config)
 			{
-
 			    if(data.success)
 			    {
 			    	// Rediriger l'utilisateur vers la page d'accueil connecté
