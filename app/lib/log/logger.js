@@ -5,7 +5,7 @@
 var winston = require('winston');
 var path = require('path');
 
-var logFileOptions = JSON.parse( JSON.stringify(global.config.log.file) );
+var logFileOptions = global.config.log.file;
 
 logFileOptions.filename = path.normalize(path.dirname(logFileOptions.filename));
 

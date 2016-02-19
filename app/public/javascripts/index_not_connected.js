@@ -117,7 +117,7 @@ app.controller('tntHomeCtrl', function($scope, $http)
 
 		$scope.loadSignup(true);
 
-		$http.post($scope.URL + "/signup", null, $scope.signup_form)
+		$http.post($scope.URL + "/signup", $scope.signup_form)
 			.success(function(data, status, headers, config)
 			{
 			    if(data.success)
@@ -156,7 +156,7 @@ app.controller('tntHomeCtrl', function($scope, $http)
 			$("#signin-alert").hide();
 		}
 
-		$http.post($scope.URL + "/signin", null, $scope.signin_form)
+		$http.post($scope.URL + "/signin", $scope.signin_form)
 			.success(function(data, status, headers, config)
 			{
 

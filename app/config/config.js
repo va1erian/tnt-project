@@ -1,6 +1,7 @@
 /**
  * 
  */
+
 module.exports = {
 		version : "0.0",
 		ws: {				
@@ -11,7 +12,7 @@ module.exports = {
 		log : {
 			useconsole : true,
 			file : {
-				filename : '../lib/log/tnt.log', 
+				filename : __dirname + '/../lib/log/tnt.log', 
 				timestamp : true, 
 				colorize : true, 
 				level : 'trace',
@@ -21,7 +22,7 @@ module.exports = {
 				timestamp : true, 
 				colorize : true,  
 				json: false,
-				level : 'trace',
+				level : 'trace'
 			},
 			levels : {
 				trace: 0,

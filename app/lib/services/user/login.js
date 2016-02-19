@@ -6,8 +6,7 @@ var crypto = require('../../utils/crypto');
 
 exports.index = function (req, res) {
     var session = req.session;
-
-    if (!session.user) {
+    if (session.user === undefined) {
         res.render('index_not_connected', {title: "indexNotConnected"});
     } else {
         res.render('index_connected', {title: "indexConnected", user: session.user});
@@ -17,9 +16,10 @@ exports.index = function (req, res) {
 exports.createUser = function (req, res) {
 
     var data = req.body;
+    logger.trace(data);
     validator.validateUser(data, function (errors) {
         if (errors) {
-            res.status(500).json({success: false, errors: errors});
+            res.status(200).json({success: false, errors: errors});
         }
         else {
             logger.debug('Encrypting the password');
@@ -39,7 +39,7 @@ exports.connectUser = function (req, res) {
     var sess = req.session;
     var data = req.body;
 
-    data.password = crypto.encrypt(data.password);
+    //data.password = crypto.encrypt(data.password);
     /*
      //Request the Ws with {email:"", password:""}
      request.post({
@@ -77,7 +77,7 @@ exports.connectUser = function (req, res) {
         idUser: "63"
     };
     sess.user = user;
-    res.status(200).json(user);
+    res.status(200).json();
 };
 
 exports.getLostPasswd = function (req, res) {
