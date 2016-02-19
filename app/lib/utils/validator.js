@@ -14,7 +14,7 @@ function validate(value, regex) {
 exports.validateUser = function( data, callback ) {
 	
 	var errors = [];
-	
+	logger.trace(data);
 	try {
 		logger.trace(data.firstName);
 		if( !data.firstName )

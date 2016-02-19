@@ -16,6 +16,7 @@ exports.index = function (req, res) {
 exports.createUser = function (req, res) {
 
     var data = req.body;
+    logger.trace(data);
     validator.validateUser(data, function (errors) {
         if (errors) {
             res.status(200).json({success: false, errors: errors});
