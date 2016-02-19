@@ -20,12 +20,13 @@ app.controller('addressCtrl', function($scope, $http)
     $scope.checkAddress = function() {
         var url = $scope.URL + '/address/check';
 
-        $http.get(url)
+        $http.post(url)
             .success(function (data, status, headers, config) {
                 if(data.success) {
-                    $scope.confirmedAddress = data;
-                    $('#addr_validationBlock').fadeIn(200);
+                    $scope.foundAddresses = data.addresses;
+                    $('#addr_validationBlock_list').fadeIn(200);
                     $('#addNewAddress input').prop('disabled', true);
+                    $('#addr_prevalidation').prop('disabled', true);
                 }
                 else {
 
@@ -35,6 +36,13 @@ app.controller('addressCtrl', function($scope, $http)
             {
                 $scope.errorMessage = "SUBMIT ERROR";
             });
+    }
+
+    $scope.confirmAddress = function(addr) {
+        $scope.confirmedAddress = addr;
+        $('#addr_validationBlock_list').fadeOut(200, function() {
+            $('#addr_validationBlock_map').fadeIn(200);
+        });
     }
 
     $scope.deleteAddress = function(id) {
@@ -56,16 +64,17 @@ app.controller('addressCtrl', function($scope, $http)
     }
 
     $scope.addAddress = function(formattedAddress) {
-        var url = $scope.URL + '/address/add?formattedAddress='+formattedAddress;
+        var url = $scope.URL + '/address/add';
 
-        $http.get(url)
+        $http.post(url)
             .success(function (data, status, headers, config) {
                 if(data.success) {
                     $scope.listAddresses();
-                    $('#addr_validationBlock').fadeOut(200, function() {
+                    $('#addr_validationBlock_map').fadeOut(200, function() {
                         $scope.confirmedAddress = '';
                     });
                     $('#addNewAddress input').prop('disabled', false);
+                    $('#addr_prevalidation').prop('disabled', false);
                 }
                 else {
                     
@@ -77,12 +86,20 @@ app.controller('addressCtrl', function($scope, $http)
             });
     }
 
-    $scope.cancelAddress = function() {
-        $('#addr_validationBlock').fadeOut(200, function() {
+    $scope.cancelFoundAddresses = function() {
+        $('#addr_validationBlock_list').fadeOut(200, function() {
+            $scope.foundAddresses = '';
             $scope.confirmedAddress = '';
         });
         $('#addNewAddress input').prop('disabled', false);
+        $('#addr_prevalidation').prop('disabled', false);
     }
 
+    $scope.cancelAddress = function() {
+        $('#addr_validationBlock_map').fadeOut(200, function() {
+            $('#addr_validationBlock_list').fadeIn(200);
+            $scope.confirmedAddress = '';
+        });
+    }
 
 });

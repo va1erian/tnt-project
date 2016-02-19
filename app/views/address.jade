@@ -37,7 +37,14 @@ block content
                     input#exampleInputEmail1.form-control(placeholder='Nom de ville', type='text')
               button.btn.btn-block.btn-lg.btn-warning(type='submit', id='addr_prevalidation', ng-click='checkAddress();') Pré-valider
           .col-md-6
-            #addr_validationBlock
+            #addr_validationBlock_list
+              #addr_valisationBlock_foundAddresses
+                table.table.table-hover
+                  tr(ng-repeat='addr in foundAddresses')
+                    td(class='foundAddress', ng-click='confirmAddress(addr)') {{ addr.formattedAddress }}
+              .col-md-4
+                button.btn.btn-block.btn-lg.btn-success(type='submit', ng-click='cancelFoundAddresses();') &lsaquo;&lsaquo;
+            #addr_validationBlock_map
               p {{ confirmedAddress.formattedAddress }}
               img(border='0', ng-src="//maps.googleapis.com/maps/api/staticmap?center={{confirmedAddress.gps.gpsLatitude}},{{confirmedAddress.gps.gpsLongitude}}&markers=color:red%7Clabel:A%7C{{confirmedAddress.gps.gpsLatitude}},{{confirmedAddress.gps.gpsLongitude}}&zoom=12&size=550x200")
               #addressValidationButtons
