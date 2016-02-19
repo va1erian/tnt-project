@@ -29,6 +29,6 @@ exports.getListAddresses = function(req, res) {
 	res.status(200).json([{idAddress: 1,number : 8,street: "Avenue de la déchéance",postalCode: "91420",city:"Morangui",country:"France",gps: {gpsLatitude:12.2,gpsLongitude:14.5}},{idAddress: 2,number : 14,street: "Rue du poulet",postalCode: "91600",city:"Savignou",country:"France",gps: {gpsLatitude:12.2,gpsLongitude:14.5}}]);
 };
 
-exports.getListAddresses = function(req, res) {
+exports.getAddressModal = function(req, res) {
 	res.render('addressModal');
 };
