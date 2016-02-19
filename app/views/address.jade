@@ -16,25 +16,29 @@ block content
             form(role='form', id='addNewAddress')
               .form-group
                 label.control-label(for='exampleInputEmail1') Nom de l'adresse
-                input#exampleInputEmail1.form-control(placeholder='Exemple : Maison', type='email')
+                input#exampleInputEmail1.form-control(placeholder='Exemple : Maison', type='text', ng-model='new_address.name')
               .row
                 .col-md-2
                   .form-group
                     label.control-label(for='exampleInputEmail1') Numéro
-                    input#exampleInputEmail1.form-control(type='text', value='')
+                    input#exampleInputEmail1.form-control(type='text', value='', ng-model='new_address.number')
                 .col-md-10
                   .form-group
                     label.control-label(for='exampleInputEmail1') Rue
-                    input#exampleInputEmail1.form-control(placeholder='Nom de rue', type='email')
+                    input#exampleInputEmail1.form-control(placeholder='Nom de rue', type='text', ng-model='new_address.street')
               .row
                 .col-md-3
                   .form-group
                     label.control-label(for='exampleInputEmail1') CP
-                    input#exampleInputEmail1.form-control(type='text', placeholder='Code Postal')
-                .col-md-9
+                    input#exampleInputEmail1.form-control(type='text', placeholder='Code Postal', ng-model='new_address.postalCode')
+                .col-md-5
                   .form-group
                     label.control-label(for='exampleInputEmail1') Ville
-                    input#exampleInputEmail1.form-control(placeholder='Nom de ville', type='text')
+                    input#exampleInputEmail1.form-control(placeholder='Nom de ville', type='text', ng-model='new_address.city')
+                .col-md-4
+                  .form-group
+                    label.control-label(for='exampleInputEmail1') Pays
+                    input#exampleInputEmail1.form-control(type='text', placeholder='Pays', ng-model='new_address.country')
               button.btn.btn-block.btn-lg.btn-warning(type='submit', id='addr_prevalidation', ng-click='checkAddress();') Pré-valider
           .col-md-6
             #addr_validationBlock_list
