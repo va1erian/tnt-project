@@ -34,9 +34,14 @@ a {
 @keyframes spin { from { transform: scale(1) rotate(0deg);} to { transform: scale(1) rotate(360deg);}}
 
 #error-alert { width: auto; }
+#forgotten_password_form { display: none; }
 .loading-btn { display: none; }
 
-#addr_validationBlock {
+#addr_validationBlock_list {
+	display: none;
+}
+
+#addr_validationBlock_map {
 	display: none;
 }
 
@@ -46,4 +51,14 @@ a {
 
 #addr_prevalidation {
 	margin-top: 1.65em;
+}
+
+.foundAddress {
+	cursor: pointer;
+}
+
+#addr_valisationBlock_foundAddresses {
+	height: 16em;
+	overflow-y: scroll;
+	margin-bottom: 1.1em;
 }

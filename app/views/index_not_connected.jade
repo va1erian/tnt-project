@@ -28,19 +28,34 @@ block content
             h4.modal-title Connexion
           .modal-body
             #signin-alert
-            form.form-horizontal(role='form', ng-submit='signin()')
+            form#login_form.form-horizontal(role='form', ng-submit='signin()')
               .form-group
                 label.col-sm-3.control-label(for='login_email') E-mail
                 .col-sm-9
-                  input#login_email.form-control(type='text', placeholder='E-mail', ng-model='signin_form.email')
+                  input#login_email.form-control(type='email', placeholder='E-mail', ng-model='signin_form.email')
               .form-group
                 label.col-sm-3.control-label(for='login_password') Mot de passe
                 .col-sm-9
                   input#login_password.form-control(type='password', placeholder='Mot de passe', ng-model='signin_form.password')
               .form-group
                 .col-sm-offset-3.col-sm-9
-                  button.btn.btn-success(type='submit') Connexion
-  
+                  col-sm-offset-6
+                    button.btn.btn-success(type='submit') Connexion
+                    &nbsp;&nbsp;
+                  col-sm-offset-6
+                    a(href='#' ng-click="displayLostPassword(true)") Mot de passe oublié ?
+            form#forgotten_password_form.form-horizontal(role='form', ng-submit='askLostPassword()')
+              .form-group
+                label.col-sm-3.control-label(for='lost_password_email') E-mail
+                .col-sm-9
+                  input.form-control(type='email', placeholder='E-mail', ng-model='lost_password_email.email')
+              .form-group
+                .col-sm-offset-3.col-sm-9
+                  col-sm-offset-9
+                    button.btn(ng-click='displayLostPassword(false)', type='button') Annuler
+                    &nbsp;
+                    button.btn.btn-success(type='submit') Envoyer
+    
     #signup-modal.modal.fade(role='dialog')
       .modal-dialog.modal-lg
         .modal-content
@@ -86,7 +101,7 @@ block content
               .form-group
                 .col-sm-offset-3.col-sm-9
                   button#signup_send.btn.btn-success(type='submit') S'inscrire
-                  button#signup_loading.btn
+                  button#signup_loading.loading-btn.btn
                     span.glyphicon.glyphicon-refresh.glyphicon-refresh-animate
                     |  Chargement...
   
