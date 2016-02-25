@@ -1,8 +1,8 @@
 var request = require('request');
 
-var logger = require('../../log/logger');
-var validator = require('../../utils/validator');
-var crypto = require('../../utils/crypto');
+var logger 		= require('../../log/logger');
+var validator 	= require('../../utils/validator');
+var crypto 		= require('../../utils/crypto');
 
 exports.index = function (req, res) {
     var session = req.session;
@@ -69,11 +69,11 @@ exports.connectUser = function (req, res) {
      */
     var user =
     {
-        firstName: "Younes",
-        lastName: "Semghouni",
+        firstName: "Yazid",
+        lastName: "Bousetta",
         birthDate: "01/01/2020",
         gender: "M",
-        email: "semghouni@gmail.com",
+        email: "yazid@gmail.com",
         idUser: "63"
     };
     sess.user = user;

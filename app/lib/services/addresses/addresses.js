@@ -152,5 +152,5 @@ exports.getListAddresses = function (req, res) {
 };
 
 exports.getAddressModal = function (req, res) {
-    res.render('addressModal');
+    res.render('addressModal', {title: "addressModal"});
 };

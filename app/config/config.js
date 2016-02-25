@@ -1,13 +1,24 @@
 /**
  * 
  */
+var url = 'http://localhost:8088/tnt/';
 
 module.exports = {
 		version : "0.0",
-		ws: {				
-			hostname: '172.0.0.1',
-			port: 8080,
-			name: ""
+		ws: {
+			createUser:			url + 'login/createUser',
+			validateEmail:		url + 'login/validateEmail',
+			authentificate:		url + 'login/authentificate',
+			resetPassword:  	url + 'login/resetPassword',
+			
+			updatePassword:		url + 'user/updatePassword',
+			getUserProfile:		url + 'user/getUserProfile',
+			updateUserProfile:	url + 'user/updateUserProfile',
+			
+			checkAddress: 		url + 'address/checkAddress',
+			listAddress:		url + 'address/list',
+			addAddress:			url + 'address/add',
+			deleteAddress:		url + 'address/delete'
 		},
 		log : {
 			useconsole : true,
