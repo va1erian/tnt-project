@@ -22,8 +22,9 @@ exports.checkAddress = function (req, res) {
      }, ...]}"
      */
    /* var data = req.body;
-    wsRequest.post("...../address/checkAddress", data.new_address, function (error, resp, body) {
+    wsRequest.post(global.config.ws.checkAddress, data.new_address, function (error, resp, body) {
         if (error) {
+            logger.error('\t ' + error);
             res.status(500).json({success: false, error: "Error while checking the address"});
         }
         else if (resp.statusCode !== 200) {
@@ -64,8 +65,9 @@ exports.addAddress = function (req, res) {
             country: req.session.addrUser.country
         }
     };
-    wsRequest.post("...../address/add", postData, function (error, resp, body) {
+    wsRequest.post(global.config.ws.addAddress, postData, function (error, resp, body) {
         if (error) {
+            logger.error('\t ' + error);
             res.status(500).json({success: false, error: "Error while adding the address"});
         }
         else if (resp.statusCode !== 200) {
@@ -88,8 +90,9 @@ exports.addAddress = function (req, res) {
 exports.deleteAddress = function (req, res) {
     /*
     var data = {idUser: req.session.user.idUser, idAddress: req.query.idAddress};
-    wsRequest.post("...../address/delete", data, function (error, resp, body) {
+    wsRequest.post(global.config.ws.deleteAddress, data, function (error, resp, body) {
         if (error) {
+            logger.error('\t ' + error);
             res.status(500).json({success: false, error: "Error while deleting the address"});
         }
         else if (resp.statusCode !== 200) {
@@ -113,8 +116,9 @@ exports.getListAddresses = function (req, res) {
 /*
     var paramsJs = req.session.user.idUser;
     //logger.trace(paramsJs);
-    wsRequest.get("...../address/list", paramsJs, function (error, resp, body) {
+    wsRequest.get(global.config.ws.listAddress, paramsJs, function (error, resp, body) {
         if (error) {
+            logger.error('\t ' + error);
             res.status(500).json({success: false, error: "Error while retrieving the address list"});
         }
         else if (resp.statusCode !== 200) {
