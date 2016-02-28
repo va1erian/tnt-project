@@ -21,7 +21,7 @@ router.get(	'/signup/validate', login.validateAccount);
 // Sign in
 router.post('/signin', login.connectUser);
 // Get lost password
-router.get( '/passwd/lost', login.getLostPasswd);
+router.post( '/passwd/lost', login.getLostPasswd);
 // Set new password
 router.post('/passwd/new', login.setNewPasswd);
 
