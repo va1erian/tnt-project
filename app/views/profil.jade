@@ -5,39 +5,39 @@ block content
   include top_menu.jade
 
   div(ng-app='tntApp', ng-controller='tntUpdateProfileCtrl')
-    
+    //- var sessionProfile = { firstName: session.user.firstName, lastName: session.user.lastName, birthDate: session.user.birthDate, gender: session.user.gender, email: session.user.email };
     .container-fluid
       h2 Mettre à jour mon profil&nbsp;&nbsp;
         button.btn.btn-success(type='submit', data-toggle='modal', data-target='#update-password-modal') Modifier mon mot de passe
       br
 
       #profile-alert
-      form(role='form', ng-submit='updateProfile()')
+      form#profile_form(role='form', ng-submit='updateProfile()')
         .form-group
           label.col-sm-3.control-label(for='profile_email') E-mail
           .col-sm-9
-            input#profile_email.form-control(type='email', placeholder='E-mail', ng-model='profileInfo.email')
+            input#profile_email.form-control(type='email', placeholder='E-mail', ng-init='profileInfo.email=\'' + session.user.email + '\'', ng-model='profileInfo.email')
             br
         .form-group
           label.col-sm-3.control-label(for='profile_firstname') Prénom
           .col-sm-9
-            input#profile_firstname.form-control(type='text', placeholder='Prénom', ng-model='profileInfo.firstName')
+            input#profile_firstname.form-control(type='text', placeholder='Prénom', ng-init='profileInfo.firstName=\'' + session.user.firstName + '\'', ng-model='profileInfo.firstName')
             br
         .form-group
           label.col-sm-3.control-label(for='profile_lastname') Nom de famille
           .col-sm-9
-            input#profile_lastname.form-control(type='text', placeholder='Nom de famille', ng-model='profileInfo.lastName')
+            input#profile_lastname.form-control(type='text', placeholder='Nom de famille', ng-init='profileInfo.lastName=\'' + session.user.lastName + '\'', ng-model='profileInfo.lastName')
             br
         .form-group
           label.col-sm-3.control-label(for='profile_birthDate') Date de naissance
           .col-sm-9
-            input#profile_birthdate.form-control(type='text', placeholder='JJ/MM/YYYY', ng-model='profileInfo.birthDate')
+            input#profile_birthdate.form-control(type='text', placeholder='JJ/MM/YYYY', ng-init='profileInfo.birthDate=\'' + session.user.birthDate + '\'', ng-model='profileInfo.birthDate')
             br
         .form-group
           label.col-sm-3.control-label Genre
           .col-sm-9
             label.radio-inline
-              input(type='radio', name='gender', ng-model='profileInfo.gender', value='M')
+              input(type='radio', name='gender', ng-model='profileInfo.gender',  ng-init='profileInfo.gender=\'' + session.user.gender + '\'', value='M')
               span Homme
             label.radio-inline
               input(type='radio', name='gender', ng-model='profileInfo.gender', value='F')

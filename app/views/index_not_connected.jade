@@ -41,7 +41,7 @@ block content
                 .col-sm-offset-3.col-sm-9
                   col-sm-offset-6
                     button.btn.btn-success(type='submit') Connexion
-                    &nbsp;&nbsp;
+                    span &nbsp;&nbsp;
                   col-sm-offset-6
                     a(href='#' ng-click="displayLostPassword(true)") Mot de passe oublié ?
             form#forgotten_password_form.form-horizontal(role='form', ng-submit='askLostPassword()')
@@ -53,7 +53,7 @@ block content
                 .col-sm-offset-3.col-sm-9
                   col-sm-offset-9
                     button.btn(ng-click='displayLostPassword(false)', type='button') Annuler
-                    &nbsp;
+                    span &nbsp;
                     button.btn.btn-success(type='submit') Envoyer
     
     #signup-modal.modal.fade(role='dialog')
