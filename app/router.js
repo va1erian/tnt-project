@@ -12,8 +12,8 @@ router.get('/index_not_connected.html', function(req, res) {
 });
 
 /* Login */
+// 
 router.get(	'/', login.index);
-
 // Sign up
 router.post('/signup', login.createUser );
 // validate an account
@@ -37,10 +37,6 @@ router.get( '/bookmarkedjourney', bookdJourney.getAllBookmarkedJourney );
 // add abookmarked journey
 router.post('/bookmarkedjourney', bookdJourney.addBookmarkedJourney );
 // delete a bookmarked journey
-
-router.get( '/bookmarkedjourney/:idJourney', function(req, res) {});
-
-
 router.get( '/bookmarkedjourney/:idJourney', bookdJourney.deleteBookmarkedJourney );
 
 /* Addresses */
