@@ -1,4 +1,4 @@
-var logger = require('../log/logger.');
+var logger = require('../log/logger');
 
 var FIRSTNAME_SIZE 	= 64;
 var LASTNAME_SIZE 	= 64;
@@ -23,15 +23,15 @@ function checkUser( data, callback ) {
 
 	try {
 		if( !data.firstName || data.firstName.length > FIRSTNAME_SIZE )
-			errors.push( 'Incorrect firstname' );
+			errors.push( 'Prénom incorrecte' );
 		if( !data.lastName || data.lastName.length > LASTNAME_SIZE )
-			errors.push( 'Incorrect lastname' );
+			errors.push( 'Nom incorrecte' );
 		if( !data.birthDate || !validate(data.birthDate, DATE_REGEX) )
-			errors.push( 'Incorrect birth date' );
+			errors.push( 'Date de naissance incorrecte' );
 		if( !data.email || data.email.length > MAIL_SIZE  || !validate(data.email, MAIL_REGEX) )
-			errors.push( 'Incorrect email' );
+			errors.push( 'Email incorrecte' );
 		if( !data.gender || data.gender.length > GENDER_SIZE )
-		errors.push( 'Incorrect gender' );
+		errors.push( 'Genre incorrecte' );
 			
 		if( errors.length > 0 ) {
 			callback( errors );
@@ -42,7 +42,7 @@ function checkUser( data, callback ) {
 	}
 	catch( e ) {
 		logger.error('Exception when trying to validate the user information. Exception : ' + e);
-		callback( ['Exception when trying to validate the user information'] );
+		callback( ["Une erreur s'est produite lors de la vérification des information de l'utilisateur"] );
 	}
 	
 }
@@ -63,7 +63,7 @@ exports.validateUserSignUp = function( data, callback ) {
 		}
 		try {
 			if( !data.password ) {
-				errors.push( 'Incorrect password' );
+				errors.push( 'Mot de passe incorrecte' );
 			}
 			if( errors.length > 0 ) {
 				callback( errors );
@@ -74,8 +74,25 @@ exports.validateUserSignUp = function( data, callback ) {
 		}
 		catch( e ) {
 			logger.error('Exception when trying to validate the user information. Exception : ' + e);
-			callback( ['Error when trying to validate the user information'] );
+			callback( ["Une erreur s'est produite lors de la vérification des information de l'utilisateur"] );
 		}	
 	});
 };
 
+exports.validateUserSignIn = function( data, callback ) {
+	
+	try {
+		if( !data.email || data.email.length > MAIL_SIZE  || !validate(data.email, MAIL_REGEX) || 
+			!data.password ) {
+			
+			callback('Incorrect login parameters');		
+		}
+		else {
+			callback();
+		}
+	}
+	catch( e ) {
+		logger.error('Exception when trying to validate the user login parameters. Exception : ' + e);
+		callback( "Une erreur s'est produite lors de la vérification des login de l'utilisateur" );
+	}
+};
