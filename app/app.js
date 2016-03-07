@@ -17,10 +17,7 @@ else {
 	global.config = require('./config/config.js');
 }
 
-
 var router = require( './router' );
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,11 +35,11 @@ app.use(expressSession({
   saveUninitialized: true
 }));
 
-app.use('/tnt', router);
-
-app.all("/*", requireLogin, function(req, res, next) {
+app.all("/tnt/*", requireLogin, function(req, res, next) {
   next();
 });
+
+app.use('/tnt', router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -79,7 +76,7 @@ function requireLogin(req, res, next) {
   if(req.session.user) {
     next();
   } else {
-    res.redirect("/");
+    res.redirect("/tnt");
   }
 }
 
