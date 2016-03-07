@@ -154,13 +154,11 @@ app.controller('tntHomeCtrl', function($scope, $http)
 
 		if(!display)
 		{
-			$('#signin-modal h4.modal-title').html("Connexion");
 			$('#login_form').show();
 			$('#forgotten_password_form').hide();
 		}
 		else
 		{
-			$('#signin-modal h4.modal-title').html("Mot de passé oublié");
 			$('#login_form').hide();
 			$('#forgotten_password_form').show();
 		}
@@ -224,34 +222,25 @@ app.controller('tntHomeCtrl', function($scope, $http)
 			$("#signin-alert").hide();
 		}
 
-		// Affichage du composant de chargement
-		$scope.loadSignup(true);
-
-	    $http.post($scope.URL + "/signin", $scope.signin_form)
+		$http.post($scope.URL + "/signin", $scope.signin_form)
 			.success(function(data, status, headers, config)
 			{
-			    // Si succès, redirection sur la page d'accueil connecté
 			    if(data.success)
 			    {
-			    	location.reload();
+			    	// Rediriger l'utilisateur vers la page d'accueil connecté
+			    	window.location.replace(URL);
 			    }
-			    // Si le serveur ne nous a pas envoyé de données
-			    else if(typeof data.error === 'undefined')
-			    {
-			    	$scope.addSigninAlert("Une erreur inattendue est survenue.", 'alert-danger');
-			    }
-				// Sinon, afficher l'erreur
 			    else
 			    {
-			    	$scope.addSigninAlert(data.error, 'alert-danger');
+			    	// Afficher les messages d'erreur
+			    	$scope.addSignupAlert(data.error, 'alert-danger');
 			    }
 
-			    // Masquer le composant de chargement
 			    $scope.loadSignup(false);
 			})
 			.error(function(data, status, headers, config)
 			{
-				$scope.addSigninAlert('Erreur ' + status + ', impossible de contacter le serveur. Essayez plus tard.', 'alert-danger');
+				$scope.addSignupAlert('Erreur ' + status + ', impossible de contacter le serveur. Essayez plus tard.', 'alert-danger');
 				$scope.loadSignup(false);
 			});
 	}
