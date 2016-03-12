@@ -2,7 +2,166 @@ extends layout
 
 block content
 
-  include top_menu.jade
+  div(ng-app='tntApp', ng-controller='journeyCtrl')
 
-  .container-fluid
-    p Cette page affiche vos trajets.
+    include top_menu.jade
+
+    h1 {{ aaa }}
+
+    .section
+      .container
+        .row
+          .col-md-12
+            .page-header
+              h1
+                | Créer 
+                small un trajet régulier
+    .section
+      .container
+        .row
+          .col-md-12
+            form(role='form')
+              .row
+                .col-md-6
+                  .form-group
+                    label.control-label(for='exampleInputEmail1') Début
+                    input#exampleInputEmail1.form-control(placeholder='dd/mm/yyyy', type='date')
+                .col-md-6
+                  .form-group
+                    label.control-label(for='exampleInputEmail1') Fin
+                    input#exampleInputEmail1.form-control(placeholder='dd/mm/yyyy', type='date')
+              .row
+                .col-md-6
+                  .form-group
+                    label.control-label(for='exampleInputEmail1') Transport
+                    input#exampleInputEmail1.form-control(placeholder='Choisir le transport', type='text')
+                .col-md-6
+                  | Jours de la semaine
+                  br
+                  label
+                    input(type='checkbox')
+                    | L
+                  label
+                    input(type='checkbox')
+                    | M
+                  label
+                    input(type='checkbox')
+                    | M
+                  label
+                    input(type='checkbox')
+                    | J
+                  label
+                    input(type='checkbox')
+                    | V
+                  label
+                    input(type='checkbox')
+                    | S
+                  label
+                    input(type='checkbox')
+                    | D
+              .row
+                .col-md-11
+                  .form-group
+                    label.control-label(for='exampleInputEmail1') Adresse de départ
+                    input#exampleInputEmail1.form-control(placeholder="Adresse de départ", type='email')
+                .col-md-1
+                  .form-group
+                    label.control-label(for='exampleInputEmail1')  
+                    //button.btn.btn-primary(type='button') Ajouter
+              .row
+                .col-md-11
+                  .form-group
+                    label.control-label(for='exampleInputEmail1') Adresse d'arrivée
+                    input#exampleInputEmail1.form-control(placeholder="Adresse d'arrivée", type='email')
+                .col-md-1
+                  .form-group
+                    label.control-label(for='exampleInputEmail1')  
+                    //button.btn.btn-primary(type='button') Ajouter
+              .form-group
+                label.control-label(for='exampleInputPassword1')
+                  input#toggleBackJourneyCheckbox(type='checkbox', checked='', ng-click="toggleBackJourney('toggleBackJourneyCheckbox');")
+                  | Aller / retour
+              button.btn.btn-info(type='submit', ng-click='edit_outward();', data-toggle="modal", data-target="#editJourney_modal") Éditer le trajet
+              p
+                br
+                br
+              #backJourney
+                .row
+                  .col-md-12
+                    h4 Trajet Retour différent
+                  .col-md-6
+                    .form-group
+                      label.control-label(for='exampleInputEmail1') Début
+                      input#exampleInputEmail1.form-control(placeholder='dd/mm/yyyy', type='date')
+                  .col-md-6
+                    .form-group
+                      label.control-label(for='exampleInputEmail1') Fin
+                      input#exampleInputEmail1.form-control(placeholder='dd/mm/yyyy', type='date')
+                .row
+                  .col-md-6
+                    .form-group
+                      label.control-label(for='exampleInputEmail1') Transport
+                      input#exampleInputEmail1.form-control(placeholder='Choisir le transport', type='text')
+                  .col-md-6
+                    | Jours de la semaine
+                    br
+                    label
+                      input(type='checkbox')
+                      | L
+                    label
+                      input(type='checkbox')
+                      | M
+                    label
+                      input(type='checkbox')
+                      | M
+                    label
+                      input(type='checkbox')
+                      | J
+                    label
+                      input(type='checkbox')
+                      | V
+                    label
+                      input(type='checkbox')
+                      | S
+                    label
+                      input(type='checkbox')
+                      | D
+                .row
+                  .col-md-11
+                    .form-group
+                      label.control-label(for='exampleInputEmail1') Adresse de départ
+                      input#exampleInputEmail1.form-control(placeholder="Adresse de départ", type='email')
+                  .col-md-1
+                    .form-group
+                      label.control-label(for='exampleInputEmail1')  
+                      //button.btn.btn-primary(type='button') Ajouter
+                .row
+                  .col-md-11
+                    .form-group
+                      label.control-label(for='exampleInputEmail1') Adresse d'arrivée
+                      input#exampleInputEmail1.form-control(placeholder="Adresse d'arrivée", type='email')
+                  .col-md-1
+                    .form-group
+                      label.control-label(for='exampleInputEmail1')  
+                      //button.btn.btn-primary(type='button') Ajouter
+                button.btn.btn-info(type='submit', ng-click='edit_return();', data-toggle="modal", data-target="#editJourney_modal") Éditer le trajet
+                button.btn.btn-primary(type='button') Valider
+    #editJourney_modal.modal.fade
+      .modal-dialog.modal-lg
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4.modal-title Editer le trajet aller (ou retour)
+          .modal-body
+            p
+              | Si le trajet proposé ne correspond pas réellement à votre trajet, éditez
+              | le parcours.
+            //img.center-block.img-responsive(src='http://maps.googleapis.com/maps/api/staticmap?center=Tombouctou,Mali&zoom=12&size=640x400&sensor=false')
+          #map
+          .modal-footer
+            a.btn.btn-default(data-dismiss='modal') Annuler
+            a.btn.btn-primary Valider le parcours
+
+    //script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCm8MSYj4NiH6UqYOIUKxSpLrnFk-FgCpg&signed_in=true&callback=initMap', async='', defer='')
+    script(src='/controllers/journey.js')
+    //script(src='/javascripts/trajet.js')
