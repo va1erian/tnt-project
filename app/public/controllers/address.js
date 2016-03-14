@@ -1,7 +1,7 @@
 var app = angular.module('tntApp', []);
 app.controller('addressCtrl', function($scope, $http)
 {
-	$scope.URL = "http://" + window.location.hostname + ":3000/tnt";
+    $scope.URL = "http://" + window.location.hostname + ":3000/tnt";
 
     $scope.new_address = {
         name: '',
@@ -14,12 +14,12 @@ app.controller('addressCtrl', function($scope, $http)
         gpsLongitude: '',
         formattedAddress: ''
     };
-	
+    
     $scope.listAddresses = function() {
         var url = $scope.URL + '/address/list';
         $http.get(url)
             .success(function (data, status, headers, config) {
-           	 	$scope.addressesList = data;
+                $scope.addressesList = data;
             })
             .error(function (data, status, headers, config)
             {

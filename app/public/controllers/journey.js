@@ -1,11 +1,14 @@
 var app = angular.module('tntApp', []);
 app.controller('journeyCtrl', function($scope, $http)
 {
-	$scope.URL = "http://" + window.location.hostname + ":3000/tnt";
+  $scope.URL = "http://" + window.location.hostname + ":3000/tnt";
 
   $scope.addressesList = Array(); 
 
   angular.element(document).ready(function () {
+
+    $scope.map = new google.maps.Map(document.getElementById('map'), {});
+
     var url = $scope.URL + '/address/list';
     $http.get(url)
         .success(function (data, status, headers, config) {
@@ -15,24 +18,16 @@ app.controller('journeyCtrl', function($scope, $http)
           $scope.errorMessage = "SUBMIT ERROR";
         });
 
-    (function wait() {
-        if ($('#choseDeparture1 option').size() > 0) {
-          $(".chosen-select").chosen();
-        } else {
-          setTimeout(wait, 200);
-        }
-    })();
-
-/*    $(".chosen-select").each(function() {
+    $(".chosen-select").each(function() {
+      var id = $(this).attr('id');
       (function wait() {
-        alert($(this).options.size());
-        if ($('this option').size() > 0) {
-          $(this).chosen();
+        if($('#'+id+' option').size() > 0) {
+          $('#'+id).chosen();
         } else {
-          setTimeout(wait, 200);
+          setTimeout(wait, 500);
         }
       })();
-    });*/
+    });
 
 
   });
@@ -60,49 +55,53 @@ app.controller('journeyCtrl', function($scope, $http)
     }
 
     $scope.initMap = function(departure, arrival) {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 4,
-            center: {lat: -24.345, lng: 134.46}  // Australia.
-        });
+      $scope.map.center = {lat: departure.lat, lng: departure.lng};
+      $scope.map.zoom = 4;
 
-        //var depart = {lat: 48.725559, lng: 2.260095}; //48.725559, 2.260095
-        //var arrivee = {lat: 48.709267, lng: 2.171263}; //48.709267, 2.171263
-        var wpts = Array();
+      //var depart = {lat: 48.725559, lng: 2.260095}; //48.725559, 2.260095
+      //var arrivee = {lat: 48.709267, lng: 2.171263}; //48.709267, 2.171263
+      var wpts = Array();
 
-        // Set wpts (via input)
-        /*wpts.push({location:new google.maps.LatLng(48.7311728,2.255312199999935)});
-        wpts.push({location:new google.maps.LatLng(48.737497,2.229105)});
-        wpts.push({location:new google.maps.LatLng(48.7575442,2.1729616999999735)});
-        wpts.push({location:new google.maps.LatLng(48.7191667,2.151718599999981)});*/
+      // Set wpts (via input)
+      /*wpts.push({location:new google.maps.LatLng(48.7311728,2.255312199999935)});
+      wpts.push({location:new google.maps.LatLng(48.737497,2.229105)});
+      wpts.push({location:new google.maps.LatLng(48.7575442,2.1729616999999735)});
+      wpts.push({location:new google.maps.LatLng(48.7191667,2.151718599999981)});*/
 
-        console.log(wpts);
+      console.log(wpts);
 
-        var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer({
+      var directionsService = new google.maps.DirectionsService;
+      var directionsDisplay = new google.maps.DirectionsRenderer({
         draggable: true,
-        map: map,
+        map: $scope.map,
         //markerOptions : { visible : false },
         //panel: document.getElementById('right-panel')
-        });
+      });
 
-        var request = {
+      var request = {
         origin: departure,
         destination: arrival,
         waypoints: wpts,//[{location:new google.maps.LatLng(48.737497,2.229105)}],   //{lat:48.737497, lng:2.229105}
         travelMode: google.maps.TravelMode.DRIVING,
         avoidTolls: true
-        };
+      };
 
-        directionsDisplay.addListener('directions_changed', function() {
-            $scope.computeTotalDistance(directionsDisplay.getDirections());
-        });
+      directionsDisplay.addListener('directions_changed', function() {
+          $scope.computeTotalDistance(directionsDisplay.getDirections());
+      });
 
-        $scope.displayRoute(request, directionsService, directionsDisplay);
-        //sendDirections(depart, arrivee, directionsDisplay.getDirections());
+      $scope.displayRoute(request, directionsService, directionsDisplay);
+      //sendDirections(depart, arrivee, directionsDisplay.getDirections());
 
-        /*document.getElementById("envoi").addEventListener("click", function() {
-            sendDirections(depart, arrivee, directionsDisplay.getDirections(), request);
-        });*/
+      /*document.getElementById("envoi").addEventListener("click", function() {
+          sendDirections(depart, arrivee, directionsDisplay.getDirections(), request);
+      });*/
+
+      var location = {lat: $scope.map.center.lat, lng: $scope.map.center.lng};
+      google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+        google.maps.event.trigger($scope.map, 'resize');
+        $scope.map.setCenter(location);
+      });
     }
 
     // Creation du tableau des points intermediaires pour output
