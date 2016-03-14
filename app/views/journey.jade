@@ -63,7 +63,8 @@ block content
                 .col-md-11
                   .form-group
                     label.control-label(for='exampleInputEmail1') Adresse de départ
-                    input#exampleInputEmail1.form-control(placeholder="Adresse de départ", type='email')
+                    select#choseDeparture1(class="chosen-select", placeholder="Adresse de départ")
+                      option(ng-repeat='address in addressesList', value='{{address.idAddress}}') {{address.street}} {{address.postalCode}} {{address.city}} | {{address.country}}
                 .col-md-1
                   .form-group
                     label.control-label(for='exampleInputEmail1')  
@@ -72,7 +73,7 @@ block content
                 .col-md-11
                   .form-group
                     label.control-label(for='exampleInputEmail1') Adresse d'arrivée
-                    input#exampleInputEmail1.form-control(placeholder="Adresse d'arrivée", type='email')
+                    select#choseArrival1(class="chosen-select", placeholder="Adresse de d'arrivée")
                 .col-md-1
                   .form-group
                     label.control-label(for='exampleInputEmail1')  
@@ -130,7 +131,7 @@ block content
                   .col-md-11
                     .form-group
                       label.control-label(for='exampleInputEmail1') Adresse de départ
-                      input#exampleInputEmail1.form-control(placeholder="Adresse de départ", type='email')
+                      select#choseDeparture2(class="chosen-select", placeholder="Adresse de départ")
                   .col-md-1
                     .form-group
                       label.control-label(for='exampleInputEmail1')  
@@ -139,11 +140,11 @@ block content
                   .col-md-11
                     .form-group
                       label.control-label(for='exampleInputEmail1') Adresse d'arrivée
-                      input#exampleInputEmail1.form-control(placeholder="Adresse d'arrivée", type='email')
-                  .col-md-1
-                    .form-group
-                      label.control-label(for='exampleInputEmail1')  
-                      //button.btn.btn-primary(type='button') Ajouter
+                      select#choseArrival2(class="chosen-select", placeholder="Adresse de d'arrivée")
+                    .col-md-1
+                      .form-group
+                        label.control-label(for='exampleInputEmail1')  
+                        //button.btn.btn-primary(type='button') Ajouter
                 button.btn.btn-info(type='submit', ng-click='edit_return();', data-toggle="modal", data-target="#editJourney_modal") Éditer le trajet
                 button.btn.btn-primary(type='button') Valider
     #editJourney_modal.modal.fade

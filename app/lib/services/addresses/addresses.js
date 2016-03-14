@@ -46,8 +46,12 @@ exports.checkAddress = function (req, res) {
 // If error : {success:false, error: '',}
     res.status(200).json({
         success: true,
-        formattedAddress: "8 Avenue du superbe Kiabi, Saumur, 91000",
-        gps: {gpsLatitude: 47.279127, gpsLongitude: -0.064639}
+        addresses:[
+            {formattedAddress: "8 Avenue du superbe Kiabi, Saumur, 91000",
+            gps: {gpsLatitude: 47.279127, gpsLongitude: -0.064639}},
+            {formattedAddress: "2591 N High St, Columbus, OH 43202, United States",
+            gps: {gpsLatitude: 40.015124, gpsLongitude: -83.011842}}
+        ]
     });
 };
 
