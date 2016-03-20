@@ -62,44 +62,27 @@ app.controller('journeyCtrl', function($scope, $http)
       $scope.map.center = {lat: departure.lat, lng: departure.lng};
       $scope.map.zoom = 4;
 
-      //var depart = {lat: 48.725559, lng: 2.260095}; //48.725559, 2.260095
-      //var arrivee = {lat: 48.709267, lng: 2.171263}; //48.709267, 2.171263
       var wpts = Array();
 
-      // Set wpts (via input)
-      /*wpts.push({location:new google.maps.LatLng(48.7311728,2.255312199999935)});
-      wpts.push({location:new google.maps.LatLng(48.737497,2.229105)});
-      wpts.push({location:new google.maps.LatLng(48.7575442,2.1729616999999735)});
-      wpts.push({location:new google.maps.LatLng(48.7191667,2.151718599999981)});*/
-
-      console.log(wpts);
-
       var directionsService = new google.maps.DirectionsService;
-      var directionsDisplay = new google.maps.DirectionsRenderer({
+      $scope.directionsDisplay = new google.maps.DirectionsRenderer({
         draggable: true,
         map: $scope.map,
-        //markerOptions : { visible : false },
-        //panel: document.getElementById('right-panel')
       });
 
-      var request = {
+      $scope.request = {
         origin: departure,
         destination: arrival,
-        waypoints: wpts,//[{location:new google.maps.LatLng(48.737497,2.229105)}],   //{lat:48.737497, lng:2.229105}
+        waypoints: wpts,
         travelMode: google.maps.TravelMode.DRIVING,
         avoidTolls: true
       };
 
-      directionsDisplay.addListener('directions_changed', function() {
-          $scope.computeTotalDistance(directionsDisplay.getDirections());
+      $scope.directionsDisplay.addListener('directions_changed', function() {
+          $scope.computeTotalDistance($scope.directionsDisplay.getDirections());
       });
 
-      $scope.displayRoute(request, directionsService, directionsDisplay);
-      //sendDirections(depart, arrivee, directionsDisplay.getDirections());
-
-      /*document.getElementById("envoi").addEventListener("click", function() {
-          sendDirections(depart, arrivee, directionsDisplay.getDirections(), request);
-      });*/
+      $scope.displayRoute($scope.request, directionsService, $scope.directionsDisplay);
 
       var location = {lat: $scope.map.center.lat, lng: $scope.map.center.lng};
       google.maps.event.addListenerOnce($scope.map, 'idle', function(){
@@ -108,23 +91,23 @@ app.controller('journeyCtrl', function($scope, $http)
       });
     }
 
-    // Creation du tableau des points intermediaires pour output
-    $scope.sendDirections = function(departure, arrival, trajets, request) {
-      var myroute = trajets.routes[0];
+    $scope.validate_journey = function() {
+      $scope.sendDirections();
+    }
+
+    $scope.sendDirections = function() {
+      var myroute = $scope.directionsDisplay.getDirections().routes[0];
       var waypoints = Array();
       
       for (var i = 0; i < myroute.legs.length; i++) {
         console.log(myroute.legs[i].via_waypoints.length);
         for(var j = 0; j < myroute.legs[i].via_waypoints.length; j++) {
-          // waypoints.push({lat:48.709267, lng:2.171263});
-          //if(myroute.legs[i].via_waypoints[j])
             waypoints.push({lat:myroute.legs[i].via_waypoints[j].lat(),
                             lng:myroute.legs[i].via_waypoints[j].lng()});
         }
-        //console.log(request.waypoints[i].location);
         if(i < myroute.legs.length-1) {
-          waypoints.push({lat:request.waypoints[i].location.lat(),
-                          lng:request.waypoints[i].location.lng()});
+          waypoints.push({lat:$scope.request.waypoints[i].location.lat(),
+                          lng:$scope.request.waypoints[i].location.lng()});
         }
       }
       console.log(waypoints);

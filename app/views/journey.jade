@@ -164,7 +164,7 @@ block content
           #map
           .modal-footer
             a.btn.btn-default(data-dismiss='modal') Annuler
-            a.btn.btn-primary Valider le parcours
+            a.btn.btn-primary(ng-click='validate_journey();') Valider le parcours
 
     //script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCm8MSYj4NiH6UqYOIUKxSpLrnFk-FgCpg&signed_in=true&callback=initMap', async='', defer='')
     script(src='/controllers/journey.js')
