@@ -10,48 +10,52 @@ app.controller('journeyCtrl', function($scope, $http)
     $scope.map = new google.maps.Map(document.getElementById('map'), {});
 
     var url = $scope.URL + '/address/list';
-    $http.get(url)
-        .success(function (data, status, headers, config) {
-          $scope.addressesList = data;
-        })
-        .error(function (data, status, headers, config) {
-          $scope.errorMessage = "SUBMIT ERROR";
-        });
 
-    $(".chosen-select").each(function() {
-      var id = $(this).attr('id');
-      (function wait() {
-        if($('#'+id+' option').size() > 0) {
-          $('#'+id).chosen();
-        } else {
-          setTimeout(wait, 500);
-        }
-      })();
+    var promise_cities = new Promise(function(resolve, reject) {
+      $http.get(url)
+      .success(function (data, status, headers, config) {
+        resolve("Cities loaded!");
+        $scope.addressesList = data;
+      })
+      .error(function (data, status, headers, config) {
+        reject(Error("Unable to load cities"));
+      });
     });
 
-
-  });
-
+    promise_cities.then(function(result) {
+      $(".chosen-select-1").each(function() {
+        var id = $(this).attr('id');
+        $('#'+id).chosen();
+      });
+    }, function(err) {
+        console.log(err);
+      });
+    });
 
     $scope.toggleBackJourney = function(id) {
-        if($('#'+id).is(":checked")) {
-            $('#backJourney').fadeOut(200);
-        }
-        else {
-           $('#backJourney').fadeIn(200);
-        }
+      if($('#'+id).is(":checked")) {
+          $('#backJourney').fadeOut(200);
+      }
+      else {
+         $('#backJourney').fadeIn(200, function () {
+            $(".chosen-select-2").each(function() {
+              var id = $(this).attr('id');
+              $('#'+id).chosen();
+            });
+        });
+      }
     }
 
     $scope.edit_outward = function() {
-        var departure = {lat: 48.725559, lng: 2.260095};
-        var arrival = {lat: 48.709267, lng: 2.171263};
-        $scope.initMap(departure, arrival);
+      var departure = {lat: 48.725559, lng: 2.260095};
+      var arrival = {lat: 48.709267, lng: 2.171263};
+      $scope.initMap(departure, arrival);
     }
 
     $scope.edit_return = function() {
-        var departure = {lat: 48.725559, lng: 2.260095};
-        var arrival = {lat: 48.709267, lng: 2.171263};
-        $scope.initMap(departure, arrival);
+      var departure = {lat: 48.725559, lng: 2.260095};
+      var arrival = {lat: 48.709267, lng: 2.171263};
+      $scope.initMap(departure, arrival);
     }
 
     $scope.initMap = function(departure, arrival) {
