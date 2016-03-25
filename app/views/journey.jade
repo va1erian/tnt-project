@@ -63,8 +63,7 @@ block content
                 .col-md-11
                   .form-group
                     label.control-label(for='exampleInputEmail1') Adresse de départ
-                    select#choseDeparture1(class="chosen-select chosen-select-1", placeholder="Adresse de départ")
-                      option(ng-repeat='address in addressesList', value='{{address.idAddress}}') {{address.street}} {{address.postalCode}} {{address.city}} | {{address.country}}
+                    select#choseDeparture1(class="chosen-select chosen-select-1", ng-init="address=addressesList[0]", ng-model='address', ng-options="address as address.name+' | '+address.street+' '+address.postalCode+' '+address.city+' | '+address.country for address in addressesList track by address.idAddress", ng-change="setLocation('choseDeparture1');")
                 .col-md-1
                   .form-group
                     label.control-label(for='exampleInputEmail1')  
@@ -73,8 +72,7 @@ block content
                 .col-md-11
                   .form-group
                     label.control-label(for='exampleInputEmail1') Adresse d'arrivée
-                    select#choseArrival1(class="chosen-select chosen-select-1", placeholder="Adresse de d'arrivée")
-                      option(ng-repeat='address in addressesList', value='{{address.idAddress}}') {{address.street}} {{address.postalCode}} {{address.city}} | {{address.country}}
+                    select#choseArrival1(class="chosen-select chosen-select-1",, ng-init="address=addressesList[0]", ng-model='address', ng-options="address as address.name+' | '+address.street+' '+address.postalCode+' '+address.city+' | '+address.country for address in addressesList track by address.idAddress", ng-change="setLocation('choseArrival1');")
                 .col-md-1
                   .form-group
                     label.control-label(for='exampleInputEmail1')  
@@ -132,8 +130,7 @@ block content
                   .col-md-11
                     .form-group
                       label.control-label(for='exampleInputEmail1') Adresse de départ
-                      select#choseDeparture2(class="chosen-select chosen-select-2", placeholder="Adresse de départ")
-                        option(ng-repeat='address in addressesList', value='{{address.idAddress}}') {{address.street}} {{address.postalCode}} {{address.city}} | {{address.country}}
+                      select#choseDeparture2(class="chosen-select chosen-select-2", ng-init="address=addressesList[0]", ng-model='address', ng-options="address as address.name+' | '+address.street+' '+address.postalCode+' '+address.city+' | '+address.country for address in addressesList track by address.idAddress", ng-change="setLocation('choseDeparture2');")
                   .col-md-1
                     .form-group
                       label.control-label(for='exampleInputEmail1')  
@@ -142,8 +139,7 @@ block content
                   .col-md-11
                     .form-group
                       label.control-label(for='exampleInputEmail1') Adresse d'arrivée
-                      select#choseArrival2(class="chosen-select chosen-select-2", placeholder="Adresse de d'arrivée")
-                        option(ng-repeat='address in addressesList', value='{{address.idAddress}}') {{address.street}} {{address.postalCode}} {{address.city}} | {{address.country}}
+                      select#choseArrival2(class="chosen-select chosen-select-2", ng-init="address=addressesList[0]", ng-model='address', ng-options="address as address.name+' | '+address.street+' '+address.postalCode+' '+address.city+' | '+address.country for address in addressesList track by address.idAddress", ng-change="setLocation('choseArrival2');")
                     .col-md-1
                       .form-group
                         label.control-label(for='exampleInputEmail1')  

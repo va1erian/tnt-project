@@ -5,6 +5,11 @@ app.controller('journeyCtrl', function($scope, $http)
 
   $scope.addressesList = Array(); 
 
+  $scope.departure1 = {lat: 0, lng: 0};
+  $scope.arrival1 = {lat: 0, lng: 0};
+  $scope.departure2 = {lat: 0, lng: 0};
+  $scope.arrival2 = {lat: 0, lng: 0};
+
   angular.element(document).ready(function () {
 
     $scope.map = new google.maps.Map(document.getElementById('map'), {});
@@ -25,6 +30,7 @@ app.controller('journeyCtrl', function($scope, $http)
     promise_cities.then(function(result) {
       $(".chosen-select-1").each(function() {
         var id = $(this).attr('id');
+        $('#'+id+' option').eq(0).remove();
         $('#'+id).chosen();
       });
     }, function(err) {
@@ -46,10 +52,14 @@ app.controller('journeyCtrl', function($scope, $http)
       }
     }
 
+    $scope.setLocation = function(id) {
+      console.log($scope.address);
+    }
+
     $scope.edit_outward = function() {
-      var departure = {lat: 48.725559, lng: 2.260095};
-      var arrival = {lat: 48.709267, lng: 2.171263};
-      $scope.initMap(departure, arrival);
+      /*var departure = {lat: 48.725559, lng: 2.260095};
+      var arrival = {lat: 48.709267, lng: 2.171263};*/
+      $scope.initMap($scope.departure, $scope.arrival);
     }
 
     $scope.edit_return = function() {

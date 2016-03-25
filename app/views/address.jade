@@ -66,6 +66,7 @@ block content
                 table.table.table-hover
                   thead
                     tr
+                      td Label
                       td Rue
                       td Ville
                       td Code Postal
@@ -73,6 +74,7 @@ block content
                       td
                   tbody
                   tr(ng-repeat='address in addressesList')
+                    td {{ address.name }}
                     td {{ address.number }} {{ address.street }}
                     td {{ address.city }}
                     td {{ address.postalCode }}

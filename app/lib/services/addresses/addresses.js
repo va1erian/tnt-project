@@ -142,6 +142,7 @@ exports.getListAddresses = function (req, res) {
 
     res.status(200).json([{
         idAddress: 1,
+        name: "First address",
         number: 8,
         street: "Avenue de la déchéance",
         postalCode: "91420",
@@ -150,12 +151,31 @@ exports.getListAddresses = function (req, res) {
         gps: {gpsLatitude: 12.2, gpsLongitude: 14.5}
     }, {
         idAddress: 2,
+        name: "Old North Arcade",
         number: 14,
         street: "Rue du poulet",
         postalCode: "91600",
         city: "Savignou",
-        country: "France",
+        country: "Etats-Unis",
         gps: {gpsLatitude: 12.2, gpsLongitude: 14.5}
+    }, {
+        idAddress: 3,
+        name: "Massy Gare TGV",
+        number: 7,
+        street: "Avenue Carnot",
+        postalCode: "91300",
+        city: "Massy",
+        country: "France",
+        gps: {gpsLatitude: 48.725912, gpsLongitude: 2.261339}
+    }, {
+        idAddress: 4,
+        name: "Polytech Paris-Sud",
+        number: 620,
+        street: "Rue Louis de Broglie",
+        postalCode: "91400",
+        city: "Orsay",
+        country: "France",
+        gps: {gpsLatitude: 48.709061, gpsLongitude: 2.171231}
     }]);
 };
 
