@@ -5,14 +5,7 @@ app.controller('journeyCtrl', function($scope, $http)
 
   $scope.addressesList = Array(); 
 
-  $scope.departure1 = {lat: 0, lng: 0};
-  $scope.arrival1 = {lat: 0, lng: 0};
-  $scope.departure2 = {lat: 0, lng: 0};
-  $scope.arrival2 = {lat: 0, lng: 0};
-
   angular.element(document).ready(function () {
-
-    $scope.map = new google.maps.Map(document.getElementById('map'), {});
 
     var url = $scope.URL + '/address/list';
 
@@ -20,6 +13,7 @@ app.controller('journeyCtrl', function($scope, $http)
       $http.get(url)
       .success(function (data, status, headers, config) {
         resolve("Cities loaded!");
+
         $scope.addressesList = data;
       })
       .error(function (data, status, headers, config) {
@@ -32,43 +26,74 @@ app.controller('journeyCtrl', function($scope, $http)
         var id = $(this).attr('id');
         $('#'+id+' option').eq(0).remove();
         $('#'+id).chosen();
+        var gps = {lat: $scope.addressesList[0].gps.gpsLatitude, lng: $scope.addressesList[0].gps.gpsLongitude};
+        $scope.departure1 = gps;
+        $scope.arrival1 = gps;
+        $scope.departure2 = gps;
+        $scope.arrival2 = gps;
       });
     }, function(err) {
         console.log(err);
       });
-    });
+
+    $scope.backJourneyReady = false;
+
+  });
 
     $scope.toggleBackJourney = function(id) {
       if($('#'+id).is(":checked")) {
-          $('#backJourney').fadeOut(200);
+        $('#backJourney').fadeOut(200);
       }
       else {
-         $('#backJourney').fadeIn(200, function () {
+        $('#backJourney').fadeIn(200, function () {
+          if(!$scope.backJourneyReady) {
             $(".chosen-select-2").each(function() {
               var id = $(this).attr('id');
+              $('#'+id+' option').eq(0).remove();
               $('#'+id).chosen();
             });
+            $scope.backJourneyReady = true;
+          }
         });
       }
     }
 
     $scope.setLocation = function(id) {
-      console.log($scope.address);
+      var gps = {lat: $scope.address.gps.gpsLatitude, lng: $scope.address.gps.gpsLongitude};
+      switch(id) {
+        case "choseDeparture1":
+          $scope.departure1 = gps;
+          break;
+        case "choseArrival1":
+          $scope.arrival1 = gps;
+          break;
+        case "choseDeparture2":
+          $scope.departure2 = gps;
+          break;
+        case "choseArrival2":
+          $scope.arrival2 = gps;
+          break;
+      }
+      if($scope.departure1 && $scope.arrival1) {
+        $scope.initMap($scope.departure1, $scope.arrival1);
+      }
     }
 
     $scope.edit_outward = function() {
-      /*var departure = {lat: 48.725559, lng: 2.260095};
-      var arrival = {lat: 48.709267, lng: 2.171263};*/
-      $scope.initMap($scope.departure, $scope.arrival);
+      $scope.initMap($scope.departure1, $scope.arrival1);
     }
 
     $scope.edit_return = function() {
-      var departure = {lat: 48.725559, lng: 2.260095};
-      var arrival = {lat: 48.709267, lng: 2.171263};
-      $scope.initMap(departure, arrival);
+      if($('#toggleBackJourneyCheckbox').is(":checked")) {
+        $scope.initMap($scope.departure1, $scope.arrival1);
+      }
+      else {
+        $scope.initMap($scope.departure2, $scope.arrival2);
+      }
     }
 
     $scope.initMap = function(departure, arrival) {
+      $scope.map = new google.maps.Map(document.getElementById('map'), {});
       $scope.map.center = {lat: departure.lat, lng: departure.lng};
       $scope.map.zoom = 4;
 
@@ -95,7 +120,7 @@ app.controller('journeyCtrl', function($scope, $http)
       $scope.displayRoute($scope.request, directionsService, $scope.directionsDisplay);
 
       var location = {lat: $scope.map.center.lat, lng: $scope.map.center.lng};
-      google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+      google.maps.event.addListenerOnce($scope.map, 'idle', function() {
         google.maps.event.trigger($scope.map, 'resize');
         $scope.map.setCenter(location);
       });
@@ -110,7 +135,7 @@ app.controller('journeyCtrl', function($scope, $http)
       var waypoints = Array();
       
       for (var i = 0; i < myroute.legs.length; i++) {
-        console.log(myroute.legs[i].via_waypoints.length);
+        //console.log(myroute.legs[i].via_waypoints.length);
         for(var j = 0; j < myroute.legs[i].via_waypoints.length; j++) {
             waypoints.push({lat:myroute.legs[i].via_waypoints[j].lat(),
                             lng:myroute.legs[i].via_waypoints[j].lng()});
@@ -126,7 +151,6 @@ app.controller('journeyCtrl', function($scope, $http)
     $scope.displayRoute = function(request, service, display) {
       service.route(request, function(response, status) {
         if (status === google.maps.DirectionsStatus.OK) {
-          console.log(response);
           display.setDirections(response);
         } else {
           alert('Could not display directions due to: ' + status);
