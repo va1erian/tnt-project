@@ -46,8 +46,12 @@ exports.checkAddress = function (req, res) {
 // If error : {success:false, error: '',}
     res.status(200).json({
         success: true,
-        formattedAddress: "8 Avenue du superbe Kiabi, Saumur, 91000",
-        gps: {gpsLatitude: 47.279127, gpsLongitude: -0.064639}
+        addresses:[
+            {formattedAddress: "7 Avenue Carnot, Massy, 91300",
+            gps: {gpsLatitude: 48.725912, gpsLongitude: 2.261339}},
+            {formattedAddress: "2591 N High St, Columbus, OH 43202, United States",
+            gps: {gpsLatitude: 40.015124, gpsLongitude: -83.011842}}
+        ]
     });
 };
 
@@ -138,20 +142,40 @@ exports.getListAddresses = function (req, res) {
 
     res.status(200).json([{
         idAddress: 1,
-        number: 8,
-        street: "Avenue de la déchéance",
-        postalCode: "91420",
-        city: "Morangui",
-        country: "France",
-        gps: {gpsLatitude: 12.2, gpsLongitude: 14.5}
+        name: "Centro de Mardid",
+        number: 16,
+        street: "Calle Tetuàn",
+        postalCode: "28013",
+        city: "Madrid",
+        country: "Espagne",
+        gps: {gpsLatitude: 40.417434, gpsLongitude: -3.703874}
     }, {
         idAddress: 2,
-        number: 14,
-        street: "Rue du poulet",
-        postalCode: "91600",
-        city: "Savignou",
+        name: "Kiabi de Saumur",
+        number: 110,
+        street: "Boulevard des Demoiselles",
+        postalCode: "49400",
+        city: "Saumur",
         country: "France",
-        gps: {gpsLatitude: 12.2, gpsLongitude: 14.5}
+        gps: {gpsLatitude: 47.279151, gpsLongitude: -0.064629}
+    }, {
+        idAddress: 3,
+        name: "Massy Gare TGV",
+        number: 7,
+        street: "Avenue Carnot",
+        postalCode: "91300",
+        city: "Massy",
+        country: "France",
+        gps: {gpsLatitude: 48.725912, gpsLongitude: 2.261339}
+    }, {
+        idAddress: 4,
+        name: "Polytech Paris-Sud",
+        number: 620,
+        street: "Rue Louis de Broglie",
+        postalCode: "91400",
+        city: "Orsay",
+        country: "France",
+        gps: {gpsLatitude: 48.709061, gpsLongitude: 2.171231}
     }]);
 };
 
